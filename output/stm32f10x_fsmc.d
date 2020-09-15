@@ -1,0 +1,10 @@
+.\output\stm32f10x_fsmc.o: Lib\SRC\stm32f10x_fsmc.c
+.\output\stm32f10x_fsmc.o: .\Lib\inc\stm32f10x_fsmc.h
+.\output\stm32f10x_fsmc.o: .\System\stm32f10x.h
+.\output\stm32f10x_fsmc.o: .\System\core_cm3.h
+.\output\stm32f10x_fsmc.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\stm32f10x_fsmc.o: .\System\system_stm32f10x.h
+.\output\stm32f10x_fsmc.o: .\Lib\inc\stm32f10x_conf.h
+.\output\stm32f10x_fsmc.o: .\Lib\inc\stm32f10x_gpio.h
+.\output\stm32f10x_fsmc.o: .\System\stm32f10x.h
+.\output\stm32f10x_fsmc.o: .\Lib\inc\stm32f10x_rcc.h
