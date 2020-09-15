@@ -577,8 +577,7 @@ void Hardware_Init(void)
 {
 //	Cpu_Init();	//CPU初始化
 	RCC_Configuration();
-	GPIO_UART();
-	USART_Configuration(9600);
+	
 	PORT_Gpio_Init();//GPIO配置
 	EXTIX_Init();
 	Lcd_Init();	//液晶初始化

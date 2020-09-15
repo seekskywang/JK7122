@@ -92,6 +92,14 @@ void Power_Process(void)
 	ReadPselect();
 	ReadCalData();//读取保存数据
 	Parameter_valuecomp();//比较设置参数
+	if(SaveData.pselect == 0)
+	{
+		GPIO_UART();
+		USART_Configuration(19200);
+	}else{
+		GPIO_UART();
+		USART_Configuration(9600);
+	}
 	if(SaveData.Group>GROUP_MAX)
 		SaveData.Group=0;
 //	SaveData.Factory.BootNum++;//开机次数	
@@ -2303,8 +2311,16 @@ if(FacBuf.rec.end)//通讯协议选择
 	memset(FacBuf.rec.buf,'\0',30);//清空缓冲
 	FacBuf.rec.end=FALSE;//接收缓冲可读标志复位
 	FacBuf.rec.ptr=0;//接收指针清零
-	
+	if(SaveData.pselect == 0)
+	{
+		GPIO_UART();
+		USART_Configuration(19200);
+	}else{
+		GPIO_UART();
+		USART_Configuration(9600);
+	}
 	SavePselect();
+	
 }
 if(SaveData.pselect == 0)//通讯协议1
 {
