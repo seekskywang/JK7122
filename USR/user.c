@@ -166,7 +166,7 @@ const u8 W_Sel_Tab[][16+1]=
 	"Range:0.01-12mA ",
 	"Range:0.00-12mA ",
 	"Range:0.1-999.9 ",
-	"R:0.1-999.9 0=C ",
+	"R:0.5-999.9 0=C ",
 	"Select by ^ or v",
 	"Range: 0-9 0=OFF",
 	
@@ -195,7 +195,7 @@ const u8 I_W_Sel_Tab[][16+1]=
 	"Range:0.01-12mA ",
 	"Range:0.00-12mA ",
 	"Range:0.1-999.9 ",
-	"R:0.1-999.9 0=C ",
+	"R:0.5-999.9 0=C ",
 	"Select by ^ or v",
 	"Range:0-9 0=OFF ",
 	"Range:00.10-1.00",
@@ -212,7 +212,7 @@ const u8 I_WDC_Sel_Tab[][16+1]=
 	"Range:0.01-5mA  ",
 	"Range:0.00-5mA  ",
 	"Range:0.1-999.9 ",
-	"R:0.1-999.9 0=C ",
+	"R:0.5-999.9 0=C ",
 	"Select by ^ or v",
 	"Range:0-9 0=OFF ",
 	"Range:00.10-1.00",
@@ -357,13 +357,13 @@ const u16 ParameterLimit[][2]=
 	{ 500, 1},
 	{ 500, 0},
 	{ 9999, 1},
-	{ 9999, 0},
+	{ 9999, 5},
 	{ 1, 0},
 	{ 9, 0},
 	{ 100, 10},
 	{ 9999, 0},
 	{ 9999, 0},
-	{ 9999, 0},
+	{ 9999, 6},
 	
 };
 //const u16 ParameterLimit_AC[][2]=
@@ -391,13 +391,13 @@ const u16 ParameterLimit_AC[][2]=
 	{ 1200, 1},
 	{ 1200, 0},
 	{ 9999, 1},
-	{ 9999, 0},
+	{ 9999, 5},
 	{ 1, 0},
 	{ 9, 0},
 	{ 100, 10},
 	{ 9999, 0},
 	{ 9999, 1},
-	{ 9999, 0},
+	{ 9999, 6},
 	
 };
 
@@ -409,13 +409,13 @@ const u16 ParameterComp[][2]=
 	{ 1200, 1},
 	{ 1200, 0},
 	{ 9999, 1},
-	{ 9999, 0},
+	{ 9999, 5},
 	{ 1, 0},
 	{ 9, 0},
 	{ 100, 10},
 	{ 9999, 0},
 	{ 9999, 1},
-	{ 9999, 0},
+	{ 9999, 6},
 	
 };
 const u16 ParameterLimit_dot[]={2,2,2,1,1,0,0,2,0,0,1};
@@ -2317,9 +2317,30 @@ u8 Number_Setup(NumBox_TypeDef * pt)
 					pt->Num-=POW_NUM[len];
 				else
 				{
-
-					pt->Num=pt->Min;
-					Beep_Two();//ÏìÁ½Éù
+					if(pt->Min == 5 || pt->Min == 6)
+					{
+						if(pt->Min == 6)
+						{
+							if(pt->Num != 0)
+							{
+								pt->Num = 0;
+							}else{
+								Beep_Two();//ÏìÁ½Éù
+							}
+						}
+						
+						if(pt->Min == 5)
+						{
+							if(pt->Num != 0)
+							{
+								pt->Num = 0;
+							}else{
+								Beep_Two();//ÏìÁ½Éù
+							}
+						}
+					}else{
+						
+					}
 				}
 				break;
 
@@ -2349,9 +2370,25 @@ u8 Number_Setup(NumBox_TypeDef * pt)
 					pt->Num-=POW_NUM[len];
 				else
 				{
-
-					pt->Num=pt->Min;
-					Beep_Two();//ÏìÁ½Éù
+					if(pt->Min == 6)
+					{
+						if(pt->Num != 0)
+						{
+							pt->Num = 0;
+						}else{
+							Beep_Two();//ÏìÁ½Éù
+						}
+					}
+					
+					if(pt->Min == 5)
+					{
+						if(pt->Num != 0)
+						{
+							pt->Num = 0;
+						}else{
+							Beep_Two();//ÏìÁ½Éù
+						}
+					}
 				}
 				break;
 
@@ -2362,12 +2399,36 @@ u8 Number_Setup(NumBox_TypeDef * pt)
 					len=current-1;
 				else
 					len=current;
-				pt->Num+=POW_NUM[len];
-				if(pt->Num>pt->Max)
+				if(pt->Min == 6 || pt->Min == 5)
 				{
+					if(pt->Min == 6)
+					{
+						if(pt->Num == 0)
+						{
+							pt->Num = 6;
+						}else{
+							pt->Num+=POW_NUM[len];
+						}
+					}
+					
+					if(pt->Min == 5)
+					{
+						if(pt->Num == 0)
+						{
+							pt->Num = 5;
+						}else{
+							pt->Num+=POW_NUM[len];
+						}
+					}
+				}else{
+					if(pt->Num>pt->Max)
+					{
 
-					pt->Num=pt->Max;
-					Beep_Two();//ÏìÁ½Éù
+						pt->Num=pt->Max;
+						Beep_Two();//ÏìÁ½Éù
+					}else{
+						pt->Num+=POW_NUM[len];
+					}
 				}
 				break;
 
@@ -2393,12 +2454,36 @@ u8 Number_Setup(NumBox_TypeDef * pt)
 				{
 					if(len>0)len--;
 				}
-				pt->Num+=POW_NUM[len];
-				if(pt->Num>pt->Max)
+				if(pt->Min == 6 || pt->Min == 5)
 				{
+					if(pt->Min == 6)
+					{
+						if(pt->Num == 0)
+						{
+							pt->Num = 6;
+						}else{
+							pt->Num+=POW_NUM[len];
+						}
+					}
+					
+					if(pt->Min == 5)
+					{
+						if(pt->Num == 0)
+						{
+							pt->Num = 5;
+						}else{
+							pt->Num+=POW_NUM[len];
+						}
+					}
+				}else{
+					if(pt->Num>pt->Max)
+					{
 
-					pt->Num=pt->Max;
-					Beep_Two();//ÏìÁ½Éù
+						pt->Num=pt->Max;
+						Beep_Two();//ÏìÁ½Éù
+					}else{
+						pt->Num+=POW_NUM[len];
+					}
 				}
 				break;
 

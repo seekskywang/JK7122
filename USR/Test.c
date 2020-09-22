@@ -1006,7 +1006,7 @@ void Test_Process(void)
 //							Current=0;
 					}
 					if(f_switch==FALSE)
-					if(sortT>=SORT_TIME_MIN)//超过最小时间后才开始分选
+					if(sortT>=Test_mid.set_ramp)//判别延时
 						f_sort=TRUE;//分选标志
 					break;
 	
@@ -1022,7 +1022,7 @@ void Test_Process(void)
 						Resistance=TEST_VALUE_OVER;//电阻溢出
 					}
 					if(f_switch==FALSE)
-					if(sortT>=Test_mid.set_ramp)//判别延时
+					if(sortT>=SORT_TIME_MIN)//超过最小时间后才开始分选
 					f_sort=TRUE;//分选标志
 					break;
 		
@@ -1040,7 +1040,7 @@ void Test_Process(void)
 							Resistance=TEST_VALUE_OVER;//电阻溢出
 						}
 						if(f_switch==FALSE)
-						if(sortT>=Test_mid.set_ramp)//判别延时
+						if(sortT>=SORT_TIME_MIN)//超过最小时间后才开始分选
 							f_sort=TRUE;//分选标志
 						
 					}
@@ -1064,7 +1064,7 @@ void Test_Process(void)
 	//							Current=0;
 						}
 						if(f_switch==FALSE)
-						if(sortT>=SORT_TIME_MIN)//超过最小时间后才开始分选
+						if(sortT>=Test_mid.set_ramp)//判别延时
 						f_sort=TRUE;//分选标志
 					}
 					break;
@@ -1089,8 +1089,8 @@ void Test_Process(void)
 	//							Current=0;
 						}
 						if(f_switch==FALSE)
-						if(sortT>=SORT_TIME_MIN)//超过最小时间后才开始分选
-							f_sort=TRUE;//分选标志
+						if(sortT>=Test_mid.set_ramp)//判别延时
+						f_sort=TRUE;//分选标志
 					}
 					else
 					{
@@ -1106,7 +1106,7 @@ void Test_Process(void)
 							Resistance=TEST_VALUE_OVER;//电阻溢出
 						}
 						if(f_switch==FALSE)
-						if(sortT>=Test_mid.set_ramp)//判别延时
+						if(sortT>=SORT_TIME_MIN)//超过最小时间后才开始分选
 							f_sort=TRUE;//分选标志
 					
 					}
@@ -1197,11 +1197,15 @@ void Test_Process(void)
 							{
 								SetSystemMessage(MSG_HIGH);
 								sendbuff2[2] = I_HIGH;
+							}else{
+								sendbuff2[2] = I_PASS;
 							}
 							if(dat<Test_mid.set_low)//超下限
 							{
 								SetSystemMessage(MSG_LOW);
 								sendbuff2[2] = I_LO;
+							}else{
+								sendbuff2[2] = I_PASS;
 							}
 //						}
 					
@@ -1234,11 +1238,15 @@ void Test_Process(void)
 							{
 								SetSystemMessage(MSG_HIGH);
 								sendbuff2[2] = W_F_HI;
+							}else{
+								sendbuff2[2] = W_PASS;
 							}
 							if(dat<Test_mid.set_low)//超下限
 							{
 								SetSystemMessage(MSG_LOW);
 								sendbuff2[2] = W_F_LO;
+							}else{
+								sendbuff2[2] = W_PASS;
 							}
 //						}
 					}
@@ -2228,9 +2236,12 @@ void SendRes(void)
 				}break;
 				case MSG_PAUSE://绝缘测试终止
 				{
-
-					sendbuff2[2] = I_STOP;
-					sendbuff3[2] = W_STOP;				
+					if(run_stemp == 1)
+					{
+						sendbuff2[2] = I_STOP;
+					}else if(run_stemp == 2){
+						sendbuff3[2] = W_STOP;
+					}						
 				}break;
 			}
 			
@@ -2240,12 +2251,16 @@ void SendRes(void)
 				case MSG_PASS://耐压测试通过
 				{
 					sendbuff2[2] = W_PASS;
-			sendbuff3[2] = I_PASS;
+					sendbuff3[2] = I_PASS;
 				}break;
 				case MSG_PAUSE://绝缘测试终止
 				{
-					sendbuff2[2] = W_STOP;
-					sendbuff3[2] = I_STOP;				
+					if(run_stemp == 1)
+					{
+						sendbuff2[2] = W_STOP;
+					}else if(run_stemp == 2){
+						sendbuff3[2] = I_STOP;
+					}			
 				}break;
 			}
 			
