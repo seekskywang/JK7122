@@ -454,7 +454,7 @@ const u8 FactoryTabS[][20+1]=
 {	
 //	{"                "},//型号
 	{"     JINKO      "},//型号
-	{" 7122  VER:2.09 "},//名称
+	{" 7122  VER:2.11 "},//名称
 	{" Tel:0519-88226706  "},//电话
 	{" Fax:0519-88226808  "},//传真
 	{" "},//主页
@@ -464,7 +464,7 @@ const u8 FactoryTab[][20+1]=
 {	
 //	{"                "},//型号
 	{"     JINKO      "},//型号
-	{" 7122  VER:2.09S"},//名称
+	{" 7122  VER:2.11S"},//名称
 	{" Tel:0519-88226706  "},//电话
 	{" Fax:0519-88226808  "},//传真
 	{" "},//主页
@@ -1649,7 +1649,7 @@ void Disp_Idle_Menu(void)
 		
 	
 	}
-	if(/*SaveData.Setup.Group_Item==3||*/SaveData.Setup.Group_Item==1)//绝缘电阻
+	if(SaveData.Setup.Group_Item==3||SaveData.Setup.Group_Item==1)//绝缘电阻
 	{
 		Hex_Format((u16)SaveData.Setup.I_Volt,2,3,FALSE);//显示测试时间
 		SaveData.Setup.Item=1;

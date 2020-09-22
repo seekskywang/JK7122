@@ -22,6 +22,19 @@ void ReadPselect(void)
 	AT24CXX_Read(1+sizeof(Calibrate_TypeDef)+9*sizeof(Setup_TypeDef),&SaveData.pselect,1);
 }
 
+
+void Saveaddr(void)
+{
+	AT24CXX_Write(2+sizeof(Calibrate_TypeDef)+9*sizeof(Setup_TypeDef),&SaveData.devaddr,1);
+}
+
+void Readaddr(void)
+{
+//	AT24CXX_Read(1,&SaveData.Group,1);
+	AT24CXX_Read(2+sizeof(Calibrate_TypeDef)+9*sizeof(Setup_TypeDef),&SaveData.devaddr,1);
+}
+
+
 void Store_set_flash(void)
 {
 //	u16 i;

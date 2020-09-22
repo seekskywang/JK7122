@@ -12,4 +12,6 @@ void ReadSetByGroup(void);
 void StoreCalDate(void);
 void SavePselect(void);
 void ReadPselect(void);
+void Saveaddr(void);
+void Readaddr(void);
 #endif 

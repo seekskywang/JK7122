@@ -537,6 +537,7 @@ typedef struct
 	Calibrate_TypeDef Calibrate;//校准项
 	//vu16 Crc16;//校验字
 	u8 pselect;
+	u8 devaddr;
 	
 }Save_TypeDef;
 extern bool F_Fail;//测试失败标志

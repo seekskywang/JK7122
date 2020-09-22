@@ -90,6 +90,7 @@ void Power_Process(void)
 	ReadGroup();
 	ReadSetByGroup();
 	ReadPselect();
+	Readaddr();
 	ReadCalData();//读取保存数据
 	Parameter_valuecomp();//比较设置参数
 	if(SaveData.Group>GROUP_MAX)
@@ -1448,10 +1449,10 @@ void Test_Process(void)
 						{
 							Disp_StrAt(DispBuf);//显示测试值
 							USENDI.sendI = atof(DispBuf);					
-							sendbuff2[6] = USENDI.s[0];
-							sendbuff2[7] = USENDI.s[1];
-							sendbuff2[8] = USENDI.s[2];
-							sendbuff2[9] = USENDI.s[3];
+							sendbuff3[6] = USENDI.s[0];
+							sendbuff3[7] = USENDI.s[1];
+							sendbuff3[8] = USENDI.s[2];
+							sendbuff3[9] = USENDI.s[3];
 							strcat(sendbuff,"mA;");
 						}
 						else
@@ -1460,10 +1461,10 @@ void Test_Process(void)
 							memcpy(DispBuf,"OFLA ",5);
 							//Disp_StrAt("-----");//显示测试值
 							Disp_StrAt(DispBuf);				
-							sendbuff2[6] = 0xff;
-							sendbuff2[7] = 0xff;
-							sendbuff2[8] = 0xff;
-							sendbuff2[9] = 0xff;
+							sendbuff3[6] = 0xff;
+							sendbuff3[7] = 0xff;
+							sendbuff3[8] = 0xff;
+							sendbuff3[9] = 0xff;
 						}
 						strcat(sendbuff,(char*)DispBuf);
 						
@@ -2181,9 +2182,9 @@ void SendRes(void)
 {
 	u8 i;
 	sendbuff2[0] = UART_SEND_BEGIN20;
-	sendbuff2[1] = UART_SEND_BEGIN21;
+	sendbuff2[1] = SaveData.devaddr/*UART_SEND_BEGIN21*/;
 	sendbuff3[0] = UART_SEND_BEGIN20;
-	sendbuff3[1] = UART_SEND_BEGIN21;
+	sendbuff3[1] = SaveData.devaddr/*UART_SEND_BEGIN21*/;
 	
 	U2.BIT_FLAG.ACWF = SaveData.Setup.Freq;//w_ma:d4
 	U2.BIT_FLAG.ARC = SaveData.Setup.Arc;//w_ma:d3d2d1d0,电弧
@@ -2194,15 +2195,60 @@ void SendRes(void)
 	{
 		if(Test_mid.set_item == W_SETUP/* || Test_mid.set_item == I_WSETUP*/)
 		{
-			sendbuff2[2] = W_PASS;
+			switch(GetSystemMessage())
+			{
+				case MSG_PASS://耐压测试通过
+				{
+					sendbuff2[2] = W_PASS;
+				}break;
+				case MSG_PAUSE://耐压测试终止
+				{
+					sendbuff2[2] = W_STOP;
+				}break;
+			}
 		}else if(Test_mid.set_item == I_SETUP/* || Test_mid.set_item == W_ISETUP*/){
-			sendbuff2[2] = I_PASS;
+			switch(GetSystemMessage())
+			{
+				case MSG_PASS://耐压测试通过
+				{
+					sendbuff2[2] = I_PASS;
+				}break;
+				case MSG_PAUSE://绝缘测试终止
+				{
+					sendbuff2[2] = I_STOP;
+				}break;
+			}		
 		}else if(Test_mid.set_item == I_WSETUP){
-			sendbuff2[2] = I_PASS;
-			sendbuff3[2] = W_PASS;
+			switch(GetSystemMessage())
+			{
+				case MSG_PASS://耐压测试通过
+				{
+					sendbuff2[2] = I_PASS;
+					sendbuff3[2] = W_PASS;
+				}break;
+				case MSG_PAUSE://绝缘测试终止
+				{
+
+					sendbuff2[2] = I_STOP;
+					sendbuff3[2] = W_STOP;				
+				}break;
+			}
+			
 		}else if(Test_mid.set_item == W_ISETUP){
-			sendbuff2[2] = W_PASS;
+			switch(GetSystemMessage())
+			{
+				case MSG_PASS://耐压测试通过
+				{
+					sendbuff2[2] = W_PASS;
 			sendbuff3[2] = I_PASS;
+				}break;
+				case MSG_PAUSE://绝缘测试终止
+				{
+					sendbuff2[2] = W_STOP;
+					sendbuff3[2] = I_STOP;				
+				}break;
+			}
+			
 		}
 	}
 	if(F_Fail)
@@ -2300,11 +2346,13 @@ void Uart_Process(void)
 if(FacBuf.rec.end)//通讯协议选择
 {
 	SaveData.pselect = FacBuf.rec.buf[2];
+	SaveData.devaddr = FacBuf.rec.buf[3];
 	memset(FacBuf.rec.buf,'\0',30);//清空缓冲
 	FacBuf.rec.end=FALSE;//接收缓冲可读标志复位
 	FacBuf.rec.ptr=0;//接收指针清零
 	
 	SavePselect();
+	Saveaddr();
 }
 if(SaveData.pselect == 0)//通讯协议1
 {
@@ -2460,7 +2508,7 @@ if(SaveData.pselect == 0)//通讯协议1
 						SaveData.Setup.Low=(u16)BCDtoHex1(str[6],1)*100+BCDtoHex1(str[7],1);
 						SaveData.Setup.RampDelay=(u16)BCDtoHex1(str[8],1)*100+BCDtoHex1(str[9],1);
 						SaveData.Setup.TestTime=(u16)BCDtoHex1(str[10],1)*100+BCDtoHex1(str[11],1);
-						SaveData.Setup.Arc=str[14];
+						SaveData.Setup.Arc=str[12];
 						break;
 					case 0xAD:
 						SaveData.Setup.I_Volt=(u16)BCDtoHex1(str[2],1)*100+BCDtoHex1(str[3],1);
