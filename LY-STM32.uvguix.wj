@@ -3614,9 +3614,9 @@
       </Doc>
       <Doc>
         <Name>.\USR\user.c</Name>
-        <ColumnNumber>26</ColumnNumber>
+        <ColumnNumber>9</ColumnNumber>
         <TopLine>447</TopLine>
-        <CurrentLine>458</CurrentLine>
+        <CurrentLine>466</CurrentLine>
         <Folding>1</Folding>
         <ContractedFolders></ContractedFolders>
         <PaneID>0</PaneID>
@@ -3826,8 +3826,8 @@
       <Doc>
         <Name>.\USR\pbdata.h</Name>
         <ColumnNumber>1</ColumnNumber>
-        <TopLine>370</TopLine>
-        <CurrentLine>365</CurrentLine>
+        <TopLine>376</TopLine>
+        <CurrentLine>400</CurrentLine>
         <Folding>1</Folding>
         <ContractedFolders></ContractedFolders>
         <PaneID>0</PaneID>
