@@ -454,7 +454,7 @@ const u8 FactoryTabS[][20+1]=
 {	
 //	{"                "},//型号
 	{"     JINKO      "},//型号
-	{" 7122  VER:4.85 "},//名称
+	{" 7122  VER:2.10 "},//名称
 	{" Tel:0519-88226706  "},//电话
 	{" Fax:0519-88226808  "},//传真
 	{" "},//主页
@@ -464,7 +464,7 @@ const u8 FactoryTab[][20+1]=
 {	
 //	{"                "},//型号
 	{"     JINKO      "},//型号
-	{" 7122  VER:4.85S"},//名称
+	{" 7122  VER:2.10S"},//名称
 	{" Tel:0519-88226706  "},//电话
 	{" Fax:0519-88226808  "},//传真
 	{" "},//主页
@@ -2421,13 +2421,12 @@ u8 Number_Setup(NumBox_TypeDef * pt)
 						}
 					}
 				}else{
+					pt->Num+=POW_NUM[len];
 					if(pt->Num>pt->Max)
 					{
 
 						pt->Num=pt->Max;
 						Beep_Two();//响两声
-					}else{
-						pt->Num+=POW_NUM[len];
 					}
 				}
 				break;
@@ -2476,13 +2475,12 @@ u8 Number_Setup(NumBox_TypeDef * pt)
 						}
 					}
 				}else{
+					pt->Num+=POW_NUM[len];
 					if(pt->Num>pt->Max)
 					{
 
 						pt->Num=pt->Max;
 						Beep_Two();//响两声
-					}else{
-						pt->Num+=POW_NUM[len];
 					}
 				}
 				break;

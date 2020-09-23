@@ -90,7 +90,7 @@ void Power_Process(void)
 	ReadGroup();
 	ReadSetByGroup();
 	ReadPselect();
-	Readaddr();
+//	Readaddr();
 	ReadCalData();//读取保存数据
 	Parameter_valuecomp();//比较设置参数
 	if(SaveData.Group>GROUP_MAX)
@@ -2190,9 +2190,9 @@ void SendRes(void)
 {
 	u8 i;
 	sendbuff2[0] = UART_SEND_BEGIN20;
-	sendbuff2[1] = SaveData.devaddr/*UART_SEND_BEGIN21*/;
+	sendbuff2[1] = UART_SEND_BEGIN21/*UART_SEND_BEGIN21*/;
 	sendbuff3[0] = UART_SEND_BEGIN20;
-	sendbuff3[1] = SaveData.devaddr/*UART_SEND_BEGIN21*/;
+	sendbuff3[1] = UART_SEND_BEGIN21/*UART_SEND_BEGIN21*/;
 	
 	U2.BIT_FLAG.ACWF = SaveData.Setup.Freq;//w_ma:d4
 	U2.BIT_FLAG.ARC = SaveData.Setup.Arc;//w_ma:d3d2d1d0,电弧
@@ -2361,13 +2361,13 @@ void Uart_Process(void)
 if(FacBuf.rec.end)//通讯协议选择
 {
 	SaveData.pselect = FacBuf.rec.buf[2];
-	SaveData.devaddr = FacBuf.rec.buf[3];
+//	SaveData.devaddr = FacBuf.rec.buf[3];
 	memset(FacBuf.rec.buf,'\0',30);//清空缓冲
 	FacBuf.rec.end=FALSE;//接收缓冲可读标志复位
 	FacBuf.rec.ptr=0;//接收指针清零
 	
 	SavePselect();
-	Saveaddr();
+//	Saveaddr();
 }
 if(SaveData.pselect == 0)//通讯协议1
 {

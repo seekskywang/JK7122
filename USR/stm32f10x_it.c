@@ -93,7 +93,7 @@ void USART1_IRQHandler(void)
 				}
 				else if (/*dat==SaveData.devaddr(u8)(UART_REC_BEGIN21) && */ComBuf.rec.ptr == 1)//帧头2
 				{
-					if(dat!=SaveData.devaddr) //第二字节
+					if(dat!=UART_REC_BEGIN21) //第二字节
 					{
 						ComBuf.rec.ptr=0;//重新接收 
 					}
