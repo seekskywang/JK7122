@@ -27,32 +27,18 @@ Project File Date:  07/20/2020
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'LY-STM32'
-compiling test.c...
-USR\test.c(252): warning:  #188-D: enumerated type mixed with another type
-                        F_Fail=0;
-USR\test.c(262): warning:  #188-D: enumerated type mixed with another type
-                        F_Fail=0;
-USR\test.c(1338): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const char *"
-                                                USENDI.sendI = atof(DispBuf);
-USR\test.c(1401): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const char *"
-                                                        USENDI.sendI = atof(DispBuf);                                   
-USR\test.c(1459): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const char *"
-                                                        USENDI.sendI = atof(DispBuf);                                   
-USR\test.c(1498): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const char *"
-                                                USENDI.sendI = atof(DispBuf);                                   
-USR\test.c(1552): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const char *"
-                                                USENDI.sendI = atof(DispBuf);                                   
-USR\test.c(1633): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const char *"
-                                                        USENDI.sendI = atof(DispBuf);
-USR\test.c(1699): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "const char *"
-                                                        USENDI.sendI = atof(DispBuf);
-USR\test.c(2134): warning:  #188-D: enumerated type mixed with another type
-        F_Fail=0;
-USR\test.c: 10 warnings, 0 errors
+compiling user.c...
+USR\user.c(649): warning:  #177-D: variable "j"  was declared but never referenced
+        u8 i,j;
+USR\user.c(4793): warning:  #550-D: variable "temp"  was set but never used
+        u8 i,temp;
+USR\user.c(4824): warning:  #177-D: variable "i"  was declared but never referenced
+        u8 i,temp;
+USR\user.c: 3 warnings, 0 errors
 linking...
-Program Size: Code=40376 RO-data=3504 RW-data=196 ZI-data=1644  
+Program Size: Code=40432 RO-data=3372 RW-data=196 ZI-data=1644  
 FromELF: creating hex file...
-".\output\LY-STM32.axf" - 0 Error(s), 10 Warning(s).
+".\output\LY-STM32.axf" - 0 Error(s), 3 Warning(s).
 
 <h2>Software Packages used:</h2>
 

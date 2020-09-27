@@ -81,7 +81,7 @@ const u8 DebugMenu[][16+1]=
 	"(8)1.000M    ADJ",
 	"(9)10.00M    ADJ",
 	"(10)100.0M   ADJ",
-//	"(11)1000 M   ADJ",
+	"(11)1000 M   ADJ",
 //	"(6)SAMPLE = ",
 };
 const u8 Debugext[16+1]=
@@ -120,7 +120,7 @@ const u8 CalTestTab[][16+1]=
 	"8.1.000 M  ",
 	"9.10.00 M  ",
 	"10.100.0 M ",
-//	"11.1000 M  ",
+	"11.1000 M  ",
 
 };
 //==========================================================
@@ -770,7 +770,12 @@ void CalTest_Process(u8 num)
 			Get_Res();
 			Get_FFT();
 			
-			Cal[num].NumAd=Res_count.i;
+			if(num == 10)
+			{
+				Cal[num].NumAd=Res_count.i * 10;
+			}else{
+				Cal[num].NumAd=Res_count.i;
+			}
 		
 		}
 

@@ -2745,8 +2745,14 @@ void Get_Result(void)
 			//dat=Voltage*10;//放大10倍
 			
 			dat=jisuandianzu(Cal[7+Range].Num,Cal[7+Range].NumAd,Current,Voltage,Cal[2].NumAd);
-			Resistance=(u16)dat;
+			Resistance=/*(u16)*/dat;
 		
+			if(Resistance > 900)
+			{
+				dat=jisuandianzu(Cal[7+3].Num,Cal[7+3].NumAd,Current,Voltage,Cal[2].NumAd);
+			}
+			Resistance=/*(u16)*/dat;
+			
 			dat=Voltage*10;//放大10倍
 				dat*=Cal[2].Num;
 				dat/=Cal[2].NumAd;
