@@ -2856,7 +2856,13 @@ void Get_Result(void)
 			{
 				//dat=jisuandianzu(Cal[Range].Num,Cal[Range].NumAd,Current,Voltage,Cal[0].NumAd);
 				dat=jisuandianzu(Cal[7+Range].Num,Cal[7+Range].NumAd,Current,Voltage,Cal[2].NumAd);
-				Resistance=(u16)dat;
+				Resistance=dat;
+				
+				if(Resistance > 900)
+				{
+					dat=jisuandianzu(Cal[7+3].Num,Cal[7+3].NumAd,Current,Voltage,Cal[2].NumAd);
+				}
+				Resistance=/*(u16)*/dat;
 				dat=Voltage*10;//放大10倍
 				dat*=Cal[2].Num;
 				dat/=Cal[2].NumAd;
@@ -2874,7 +2880,12 @@ void Get_Result(void)
 			{
 				//dat=jisuandianzu(Cal[Range].Num,Cal[Range].NumAd,Current,Voltage,Cal[0].NumAd);
 				dat=jisuandianzu(Cal[7+Range].Num,Cal[7+Range].NumAd,Current,Voltage,Cal[2].NumAd);
-				Resistance=(u16)dat;
+				Resistance=dat;
+				if(Resistance > 900)
+				{
+					dat=jisuandianzu(Cal[7+3].Num,Cal[7+3].NumAd,Current,Voltage,Cal[2].NumAd);
+				}
+				Resistance=/*(u16)*/dat;
 				dat=Voltage*10;//放大10倍
 				dat*=Cal[2].Num;
 				dat/=Cal[2].NumAd;
