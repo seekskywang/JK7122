@@ -1649,7 +1649,7 @@ void Disp_Idle_Menu(void)
 		
 	
 	}
-	if(SaveData.Setup.Group_Item==3||SaveData.Setup.Group_Item==1)//绝缘电阻
+	if(/*SaveData.Setup.Group_Item==3||*/SaveData.Setup.Group_Item==1)//绝缘电阻
 	{
 		Hex_Format((u16)SaveData.Setup.I_Volt,2,3,FALSE);//显示测试时间
 		SaveData.Setup.Item=1;

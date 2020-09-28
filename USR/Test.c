@@ -1331,7 +1331,7 @@ void Test_Process(void)
 					
 					LcdAddr.x=9;
 					Hex_Format(Test_value.Test_I,2,4,FALSE);//数据格式化到DispBuf
-					
+					strcat(sendbuff,(char*)DispBuf);
 					if(GetSystemMessage()!=MSG_OVER/*Current!=TEST_VALUE_OVER*/)
 					{
 						Disp_StrAt(DispBuf);//显示测试值
@@ -1355,7 +1355,7 @@ void Test_Process(void)
 						sendbuff2[8] = 0xff;
 						sendbuff2[9] = 0xff;
 					}
-					strcat(sendbuff,(char*)DispBuf);
+					
 					
 					
 					
@@ -1452,7 +1452,7 @@ void Test_Process(void)
 						
 						LcdAddr.x=9;
 						Hex_Format(Test_value.Test_I,2,4,TRUE);//数据格式化到DispBuf
-						
+						strcat(sendbuff,(char*)DispBuf);
 						if(GetSystemMessage()!=MSG_OVER/*Current!=TEST_VALUE_OVER*/)
 						{
 							Disp_StrAt(DispBuf);//显示测试值
@@ -1474,7 +1474,7 @@ void Test_Process(void)
 							sendbuff3[8] = 0xff;
 							sendbuff3[9] = 0xff;
 						}
-						strcat(sendbuff,(char*)DispBuf);
+					
 						
 //						if(Current!=TEST_VALUE_OVER)
 //						{
@@ -1626,7 +1626,7 @@ void Test_Process(void)
 ////						sendbuff2[9] = USENDI.s[3];
 ////						strcat(sendbuff,(char*)DispBuf);
 //						strcat(sendbuff,"mA;");
-
+						strcat(sendbuff,(char*)DispBuf);
 						if(GetSystemMessage()!=MSG_OVER/*Current!=TEST_VALUE_OVER*/)
 						{
 							Disp_StrAt(DispBuf);//显示测试值
@@ -1650,7 +1650,7 @@ void Test_Process(void)
 							sendbuff2[8] = 0xff;
 							sendbuff2[9] = 0xff;
 						}
-						strcat(sendbuff,(char*)DispBuf);
+						
 						sendbuff2[10] = (u8)(Test_value.Test_Time >> 8);
 						sendbuff2[11] = (u8)(Test_value.Test_Time);
 					}
