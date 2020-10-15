@@ -44,9 +44,9 @@ void USART1_IRQHandler(void)
 			{
 				SetRecTimeOut(REC_TIME_OUT);//设置接收超时周期
 				dat=USART_ReceiveData(USART1);
-				if (dat==(u8)(UART_REC_BEGIN))//帧头
+				if (/*dat==(u8)(UART_REC_BEGIN)*/ComBuf.rec.ptr==0)//帧头
 				{
-					if(ComBuf.rec.ptr!=0) //首字节
+					if(dat!=(u8)(UART_REC_BEGIN)) //首字节
 					{
 						ComBuf.rec.ptr=0;//重新接收 
 					}
@@ -126,9 +126,9 @@ void USART1_IRQHandler(void)
 		{
 			SetRecTimeOut(REC_TIME_OUT);//设置接收超时周期
 			dat=USART_ReceiveData(USART1);
-			if (dat==0XFF)//帧头1
+			if (/*dat==0XFF*/FacBuf.rec.ptr==0)//帧头1
 			{
-				if(FacBuf.rec.ptr!=0) //首字节
+				if(dat!=0XFF) //首字节
 				{
 					FacBuf.rec.ptr=0;//重新接收 
 				}
@@ -137,9 +137,9 @@ void USART1_IRQHandler(void)
 					FacBuf.rec.buf[FacBuf.rec.ptr++]=dat;
 				}
 			}
-			else if (dat==0XEE)//帧头2
+			else if (/*dat==0XEE*/FacBuf.rec.ptr==1)//帧头2
 			{
-				if(FacBuf.rec.ptr!=1) //第二字节
+				if(dat!=0XEE) //第二字节
 				{
 					FacBuf.rec.ptr=0;//重新接收 
 				}
@@ -147,9 +147,9 @@ void USART1_IRQHandler(void)
 				{
 					FacBuf.rec.buf[FacBuf.rec.ptr++]=dat;
 				}
-			}else if (dat==0XDD)//帧尾
+			}else if (/*dat==0XDD*/FacBuf.rec.ptr==4)//帧尾
 			{
-				if(FacBuf.rec.ptr!=4) //第五字节
+				if(dat!=0XDD) //第五字节
 				{
 					FacBuf.rec.ptr=0;//重新接收 
 				}else{

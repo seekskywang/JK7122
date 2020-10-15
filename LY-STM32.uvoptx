@@ -120,7 +120,6 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
-          <Name>猬yw????趏?</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -401,6 +400,11 @@
           <count>21</count>
           <WinNumber>2</WinNumber>
           <ItemText>jieguo,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>22</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>SaveData.pselect</ItemText>
         </Ww>
       </WatchWindow2>
       <Tracepoint>
