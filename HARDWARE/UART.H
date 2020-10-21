@@ -2,7 +2,7 @@
 #define _UART_H
 //收发帧缓冲长度
 #define REC_LEN_MAX  	(30)//接收帧长度
-#define SEND_LEN_MAX 	(21)//发送帧长度
+#define SEND_LEN_MAX 	(40)//发送帧长度
 
 //串口发送结构
 typedef struct

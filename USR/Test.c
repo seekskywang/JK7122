@@ -43,6 +43,7 @@ char sendbuff2[20];
 char sendbuff3[20];
 u8 strbuff[8];
 u8 respond;
+char sendend[2] = {0x0d,0x0a};
 union U1
 {
     uint8_t s[4];
@@ -1330,7 +1331,12 @@ void Test_Process(void)
 					
 					
 					LcdAddr.x=9;
-					Hex_Format(Test_value.Test_I,2,4,FALSE);//数据格式化到DispBuf
+					Hex_Format(Test_value.Test_I,2,4,FALSE);//数据格式化到DispBuf		
+					DispBuf[0] = DispBuf[1];
+					DispBuf[1] = DispBuf[2];
+					DispBuf[2] = DispBuf[3];
+					DispBuf[3] = DispBuf[4];
+					DispBuf[4] = 0;
 					strcat(sendbuff,(char*)DispBuf);
 					if(GetSystemMessage()!=MSG_OVER/*Current!=TEST_VALUE_OVER*/)
 					{
@@ -1453,6 +1459,11 @@ void Test_Process(void)
 						LcdAddr.x=9;
 						Hex_Format(Test_value.Test_I,2,4,TRUE);//数据格式化到DispBuf
 						strcat(sendbuff,(char*)DispBuf);
+						DispBuf[0] = DispBuf[1];
+						DispBuf[1] = DispBuf[2];
+						DispBuf[2] = DispBuf[3];
+						DispBuf[3] = DispBuf[4];
+						DispBuf[4] = 0;
 						if(GetSystemMessage()!=MSG_OVER/*Current!=TEST_VALUE_OVER*/)
 						{
 							Disp_StrAt(DispBuf);//显示测试值
@@ -1627,6 +1638,11 @@ void Test_Process(void)
 ////						strcat(sendbuff,(char*)DispBuf);
 //						strcat(sendbuff,"mA;");
 						strcat(sendbuff,(char*)DispBuf);
+						DispBuf[0] = DispBuf[1];
+						DispBuf[1] = DispBuf[2];
+						DispBuf[2] = DispBuf[3];
+						DispBuf[3] = DispBuf[4];
+						DispBuf[4] = 0;
 						if(GetSystemMessage()!=MSG_OVER/*Current!=TEST_VALUE_OVER*/)
 						{
 							Disp_StrAt(DispBuf);//显示测试值
@@ -2413,7 +2429,7 @@ if(SaveData.pselect == 0)//通讯协议1
 						memcpy(strbuff,"LOW ",5);
 						break;
 					case MSG_OVER:
-						memcpy(strbuff,"OFL ",5);
+						memcpy(strbuff,"BRK ",5);
 						break;
 					case MSG_ARC:
 						memcpy(strbuff,"ARC ",5);
@@ -2423,38 +2439,45 @@ if(SaveData.pselect == 0)//通讯协议1
 						memcpy(strbuff,"TEST",5);
 						break;
 				}	
-				memset(ComBuf.send.buf,0,21);
-				ComBuf.send.buf[0]=0xAA;
-				ComBuf.send.begin=FALSE;
-				memcpy(&ComBuf.send.buf[1],sendbuff,16);
+				memset(ComBuf.send.buf,0,40);
+//				ComBuf.send.buf[0]=0xAA;
+//				ComBuf.send.begin=FALSE;
+				memcpy(&ComBuf.send.buf[0],sendbuff,16);
 				strcat((char*)ComBuf.send.buf,(char*)strbuff);
-				for(i=0;i<21;i++)
+				strcat((char*)ComBuf.send.buf,(char*)sendend);//尾部增加回车和换行符
+				
+				for(i=0;i<20;i++)
 				{
 					USART_SendData(USART1, ComBuf.send.buf[i]);
 					while(USART_GetFlagStatus(USART1,USART_FLAG_TXE)==RESET);
 				}
-				USART_SendData(USART1, 0xBB);
-				while(USART_GetFlagStatus(USART1,USART_FLAG_TXE)==RESET);
 
-				
-				
 				if(Test_mid.set_item == W_ISETUP || Test_mid.set_item == I_WSETUP)
 				{
-					memset(ComBuf1.send.buf,0,21);
-					ComBuf1.send.buf[0]=0xAA;
-					ComBuf1.send.begin=FALSE;
-					memcpy(&ComBuf1.send.buf[1],sendbuff1,16);
-					strcat((char*)ComBuf1.send.buf,(char*)strbuff);
-					for(i=0;i<21;i++)
+//					memset(ComBuf1.send.buf,0,21);
+//					ComBuf1.send.buf[0]=0xAA;
+//					ComBuf1.send.begin=FALSE;
+//					memcpy(&ComBuf1.send.buf[1],sendbuff1,16);
+					strcat((char*)ComBuf.send.buf,(char*)sendbuff1);
+					strcat((char*)ComBuf.send.buf,(char*)strbuff);
+					strcat((char*)ComBuf.send.buf,(char*)sendend);//尾部增加回车和换行符
+					for(i=0;i<39;i++)
 					{
 						USART_SendData(USART1, ComBuf1.send.buf[i]);
 						while(USART_GetFlagStatus(USART1,USART_FLAG_TXE)==RESET);
 					}
-					USART_SendData(USART1, 0xBB);
+//					USART_SendData(USART1, 0xBB);
 					while(USART_GetFlagStatus(USART1,USART_FLAG_TXE)==RESET);
 
 					break;
 				}
+				
+				
+				
+
+				
+				
+				
 				break;
 			
 			case FRAME_START://启动

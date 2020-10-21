@@ -120,7 +120,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
-          <Name>猬瑆????趏薺</Name>
+          <Name>猬鉾$m?$m?趏璗</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -406,6 +406,21 @@
           <count>22</count>
           <WinNumber>2</WinNumber>
           <ItemText>SaveData.pselect</ItemText>
+        </Ww>
+        <Ww>
+          <count>23</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>sendbuff</ItemText>
+        </Ww>
+        <Ww>
+          <count>24</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>DispBuf</ItemText>
+        </Ww>
+        <Ww>
+          <count>25</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>ComBuf.send.buf</ItemText>
         </Ww>
       </WatchWindow2>
       <Tracepoint>
