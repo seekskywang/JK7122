@@ -43,6 +43,8 @@ char sendbuff2[20];
 char sendbuff3[20];
 u8 strbuff[8];
 u8 respond;
+u8 multstep;
+u8 sendflag;
 char sendend[2] = {0x0d,0x0a};
 union U1
 {
@@ -186,7 +188,10 @@ void Idle_Process(void)
 	
 	while(GetSystemStatus()==SYS_STATUS_IDLE)
 	{
-		Uart_Process();//串口处理
+		if(ComBuf.rec.end || FacBuf.rec.end)
+		{
+			Uart_Process();//串口处理
+		}
 		key=Key_Read_WithTimeOut(TICKS_PER_SEC_SOFTTIMER/10);//等待按键(100*10ms/10=100ms)
 		switch(key)
 		{
@@ -880,6 +885,7 @@ void Test_Process(void)
 	Range_Control(Range+ra_flag);
 	while(GetSystemStatus()==SYS_STATUS_TEST)
 	{
+		sendflag = 0;
 		if(F_100ms==TRUE)//100ms定时处理
 		{
 			F_100ms=FALSE;
@@ -1006,9 +1012,9 @@ void Test_Process(void)
 //						else
 //							Current=0;
 					}
-					if(f_switch==FALSE)
-					if(sortT>=Test_mid.set_ramp)//判别延时
-						f_sort=TRUE;//分选标志
+//					if(f_switch==FALSE)
+//					if(sortT>=Test_mid.set_ramp)//判别延时
+//						f_sort=TRUE;//分选标志
 					break;
 	
 				case I_SETUP://绝缘
@@ -1064,9 +1070,9 @@ void Test_Process(void)
 	//						else
 	//							Current=0;
 						}
-						if(f_switch==FALSE)
-						if(sortT>=Test_mid.set_ramp)//判别延时
-						f_sort=TRUE;//分选标志
+//						if(f_switch==FALSE)
+//						if(sortT>=Test_mid.set_ramp)//判别延时
+//						f_sort=TRUE;//分选标志
 					}
 					break;
 				case W_ISETUP:
@@ -1089,9 +1095,9 @@ void Test_Process(void)
 	//						else
 	//							Current=0;
 						}
-						if(f_switch==FALSE)
-						if(sortT>=Test_mid.set_ramp)//判别延时
-						f_sort=TRUE;//分选标志
+//						if(f_switch==FALSE)
+//						if(sortT>=Test_mid.set_ramp)//判别延时
+//						f_sort=TRUE;//分选标志
 					}
 					else
 					{
@@ -1131,7 +1137,27 @@ void Test_Process(void)
 						dat=Test_value.Test_I;
 						if(dat>Test_mid.set_high)//超上限
 						{
-							SetSystemMessage(MSG_HIGH);
+							if(SaveData.Setup.Item == 0)//AC
+							{
+								if(dat>1200)//超上限
+								{
+									SetSystemMessage(MSG_OFL);
+								}else{
+									SetSystemMessage(MSG_HIGH);
+								}
+							}
+							
+							if(SaveData.Setup.Item == 1)//DC
+							{
+								if(dat>5000)//超上限
+								{
+									SetSystemMessage(MSG_OFL);
+								}else{
+									SetSystemMessage(MSG_HIGH);
+								}
+							}
+							
+							
 							sendbuff2[2] = W_F_HI;
 						}
 						if(dat<Test_mid.set_low)//超下限
@@ -1218,7 +1244,25 @@ void Test_Process(void)
 							dat=Test_value.Test_I;
 							if(dat>Test_mid.set_high)//超上限
 							{
-								SetSystemMessage(MSG_HIGH);
+								if(SaveData.Setup.Item == 0)//AC
+								{
+									if(dat>1200)//超上限
+									{
+										SetSystemMessage(MSG_OFL);
+									}else{
+										SetSystemMessage(MSG_HIGH);
+									}
+								}
+								
+								if(SaveData.Setup.Item == 1)//DC
+								{
+									if(dat>5000)//超上限
+									{
+										SetSystemMessage(MSG_OFL);
+									}else{
+										SetSystemMessage(MSG_HIGH);
+									}
+								}
 								sendbuff3[2] = W_F_HI;
 							}
 							if(dat<Test_mid.set_low)//超下限
@@ -1237,7 +1281,25 @@ void Test_Process(void)
 							dat=Test_value.Test_I;
 							if(dat>Test_mid.set_high)//超上限
 							{
-								SetSystemMessage(MSG_HIGH);
+								if(SaveData.Setup.Item == 0)//AC
+								{
+									if(dat>1200)//超上限
+									{
+										SetSystemMessage(MSG_OFL);
+									}else{
+										SetSystemMessage(MSG_HIGH);
+									}
+								}
+								
+								if(SaveData.Setup.Item == 1)//DC
+								{
+									if(dat>5000)//超上限
+									{
+										SetSystemMessage(MSG_OFL);
+									}else{
+										SetSystemMessage(MSG_HIGH);
+									}
+								}
 								sendbuff2[2] = W_F_HI;
 							}else{
 								sendbuff2[2] = W_PASS;
@@ -1292,7 +1354,8 @@ void Test_Process(void)
 		
 		//上下限报警和过流处理
 		if((GetSystemMessage()==MSG_HIGH)||(GetSystemMessage()==MSG_LOW)||
-				(GetSystemMessage()==MSG_ARC)||(GetSystemMessage()==MSG_OVER))
+				(GetSystemMessage()==MSG_ARC)||(GetSystemMessage()==MSG_OVER)
+			||(GetSystemMessage()==MSG_OFL))
 		{
 			F_Fail=TRUE;//测试失败标志
 			SetSystemStatus(SYS_STATUS_TEST_PAUSE);//系统状态-测试暂停
@@ -1312,13 +1375,19 @@ void Test_Process(void)
 					if(SaveData.Setup.Output>Voltage)
 					{
 						if(SaveData.Setup.Output-Voltage<=2)
+						{
 							Voltage=SaveData.Setup.Output;
+							f_sort=TRUE;//分选标志
+						}
 					
 					}
 					else
 					{
 						if(Voltage-SaveData.Setup.Output<=2)
+						{
 							Voltage=SaveData.Setup.Output;
+							f_sort=TRUE;//分选标志
+						}
 					}
 					Hex_Format(Voltage,2,3,TRUE);//数据格式化到DispBuf
 					Disp_StrAt(DispBuf);//显示测试值
@@ -1331,18 +1400,26 @@ void Test_Process(void)
 					
 					
 					LcdAddr.x=9;
-					Hex_Format(Test_value.Test_I,2,4,FALSE);//数据格式化到DispBuf		
-					DispBuf[0] = DispBuf[1];
-					DispBuf[1] = DispBuf[2];
-					DispBuf[2] = DispBuf[3];
-					DispBuf[3] = DispBuf[4];
-					DispBuf[4] = 0;
+					Hex_Format(Test_value.Test_I,2,4,FALSE);//数据格式化到DispBuf
+					if(Test_value.Test_I < 1000)
+					{
+						DispBuf[0] = DispBuf[1];
+						DispBuf[1] = DispBuf[2];
+						DispBuf[2] = DispBuf[3];
+						DispBuf[3] = DispBuf[4];
+						DispBuf[4] = 0;
+					}
 					strcat(sendbuff,(char*)DispBuf);
-					if(GetSystemMessage()!=MSG_OVER/*Current!=TEST_VALUE_OVER*/)
+					if(GetSystemMessage()!=MSG_OVER && GetSystemMessage()!=MSG_OFL/*Current!=TEST_VALUE_OVER*/)
 					{
 						Disp_StrAt(DispBuf);//显示测试值
 						USENDI.sendI = atof(DispBuf);
-						Disp_Str((u8*)"mA");
+						if(Test_value.Test_I < 1000)
+						{
+							Disp_Str((u8*)" mA");
+						}else{
+							Disp_Str((u8*)"mA");
+						}
 						sendbuff2[6] = USENDI.s[0];
 						sendbuff2[7] = USENDI.s[1];
 						sendbuff2[8] = USENDI.s[2];
@@ -1351,11 +1428,19 @@ void Test_Process(void)
 					}
 					else
 					{
-//						memcpy(DispBuf,"-----",5);
-						memcpy(DispBuf,"OFLA ",5);
-						//Disp_StrAt("-----");//显示测试值
-						Disp_StrAt(DispBuf);
-						Disp_Str((u8*)"  ");
+						if(GetSystemMessage()==MSG_OFL)
+						{
+	//						memcpy(DispBuf,"-----",5);
+							memcpy(DispBuf,"OFL ",5);
+							//Disp_StrAt("-----");//显示测试值
+							Disp_StrAt(DispBuf);
+							Disp_Str((u8*)"  ");
+						}else if(GetSystemMessage()==MSG_OVER){
+							memcpy(DispBuf,"BRK ",5);
+							//Disp_StrAt("-----");//显示测试值
+							Disp_StrAt(DispBuf);
+							Disp_Str((u8*)"  ");
+						}
 						sendbuff2[6] = 0xff;
 						sendbuff2[7] = 0xff;
 						sendbuff2[8] = 0xff;
@@ -1371,6 +1456,7 @@ void Test_Process(void)
 				case I_WSETUP:
 					if(run_stemp==0)
 					{
+						multstep = 1;
 						if(SaveData.Setup.I_Volt>Voltage)
 						{
 							if(SaveData.Setup.I_Volt-Voltage<=2)
@@ -1384,9 +1470,9 @@ void Test_Process(void)
 						}
 						Hex_Format(Voltage,2,3,TRUE);//数据格式化到DispBuf
 						Disp_StrAt(DispBuf);//显示测试值
-						memset(sendbuff,0,20);
-						memcpy(sendbuff,DispBuf,4);
-						strcat(sendbuff,"kV;");
+						memset(sendbuff1,0,20);
+						memcpy(sendbuff1,DispBuf,4);
+						strcat(sendbuff1,"kV;");
 						sendbuff2[4] = (u8)(Voltage >> 8);
 						sendbuff2[5] = (u8)(Voltage);
 						
@@ -1403,7 +1489,7 @@ void Test_Process(void)
 						if(Resistance!=TEST_VALUE_OVER)
 						{
 							Disp_StrAt(DispBuf);//显示测试值
-							strcat(sendbuff,(char*)DispBuf);
+							strcat(sendbuff1,(char*)DispBuf);
 							USENDI.sendI = atof(DispBuf);					
 							sendbuff2[6] = USENDI.s[0];
 							sendbuff2[7] = USENDI.s[1];
@@ -1412,7 +1498,7 @@ void Test_Process(void)
 						}
 						else{
 							Disp_StrAt("-----");//显示测试值
-							strcat(sendbuff,"-----");
+							strcat(sendbuff1,">9999");
 							sendbuff2[6] = 0xff;
 							sendbuff2[7] = 0xff;
 							sendbuff2[8] = 0xff;
@@ -1424,31 +1510,39 @@ void Test_Process(void)
 //						sendbuff2[7] = USENDI.s[1];
 //						sendbuff2[8] = USENDI.s[2];
 //						sendbuff2[9] = USENDI.s[3];
-//						strcat(sendbuff,(char*)DispBuf);
-						strcat(sendbuff,(char*)"MΩ;");
+//						strcat(sendbuff,(char*)DispBuf);Ω
+						strcat(sendbuff1,(char*)"M;");
 						sendbuff2[10] = (u8)(Test_value.Test_Time >> 8);
 						sendbuff2[11] = (u8)(Test_value.Test_Time);
 					}
 					else
 					{
+						multstep = 2;
+						
 						if(SaveData.Setup.Output>Voltage)
 						{
 							if(SaveData.Setup.Output-Voltage<=2)
+							{
 								Voltage=SaveData.Setup.Output;
+								f_sort=TRUE;//分选标志
+							}
 						
 						}
 						else
 						{
 							if(Voltage-SaveData.Setup.Output<=2)
+							{
 								Voltage=SaveData.Setup.Output;
+								f_sort=TRUE;//分选标志
+							}
 						}
 						Hex_Format(Voltage,2,3,TRUE);//数据格式化到DispBuf
 						Disp_StrAt(DispBuf);//显示测试值
 //						memcpy(sendbuff,DispBuf,4);
 //						strcat(sendbuff,"kV;");
-						memset(sendbuff1,0,20);
-						memcpy(sendbuff1,DispBuf,4);
-						strcat(sendbuff1,"kV;");
+						memset(sendbuff,0,20);
+						memcpy(sendbuff,DispBuf,4);
+						strcat(sendbuff,"kV;");
 						
 //						sendbuff2[4] = (u8)(Voltage >> 8);
 //						sendbuff2[5] = (u8)(Voltage);
@@ -1458,16 +1552,26 @@ void Test_Process(void)
 						
 						LcdAddr.x=9;
 						Hex_Format(Test_value.Test_I,2,4,TRUE);//数据格式化到DispBuf
+						if(Test_value.Test_I < 1000)
+						{
+							DispBuf[0] = DispBuf[1];
+							DispBuf[1] = DispBuf[2];
+							DispBuf[2] = DispBuf[3];
+							DispBuf[3] = DispBuf[4];
+							DispBuf[4] = 0;
+						}
 						strcat(sendbuff,(char*)DispBuf);
-						DispBuf[0] = DispBuf[1];
-						DispBuf[1] = DispBuf[2];
-						DispBuf[2] = DispBuf[3];
-						DispBuf[3] = DispBuf[4];
-						DispBuf[4] = 0;
-						if(GetSystemMessage()!=MSG_OVER/*Current!=TEST_VALUE_OVER*/)
+						
+						if(GetSystemMessage()!=MSG_OVER && GetSystemMessage()!=MSG_OFL/*Current!=TEST_VALUE_OVER*/)
 						{
 							Disp_StrAt(DispBuf);//显示测试值
-							USENDI.sendI = atof(DispBuf);					
+							USENDI.sendI = atof(DispBuf);
+							if(Test_value.Test_I < 1000)
+							{
+								Disp_Str((u8*)" mA");
+							}else{
+								Disp_Str((u8*)"mA");
+							}							
 							sendbuff3[6] = USENDI.s[0];
 							sendbuff3[7] = USENDI.s[1];
 							sendbuff3[8] = USENDI.s[2];
@@ -1476,10 +1580,21 @@ void Test_Process(void)
 						}
 						else
 						{
-	//						memcpy(DispBuf,"-----",5);
-							memcpy(DispBuf,"OFLA ",5);
-							//Disp_StrAt("-----");//显示测试值
-							Disp_StrAt(DispBuf);				
+							if(GetSystemMessage()==MSG_OFL)
+							{
+		//						memcpy(DispBuf,"-----",5);
+								memcpy(DispBuf,"OFL ",5);
+								//Disp_StrAt("-----");//显示测试值
+								Disp_StrAt(DispBuf);
+								Disp_Str((u8*)"  ");
+								strcat(sendbuff,"mA;");
+							}else if(GetSystemMessage()==MSG_OVER){
+								memcpy(DispBuf,"BRK ",5);
+								//Disp_StrAt("-----");//显示测试值
+								Disp_StrAt(DispBuf);
+								Disp_Str((u8*)"  ");
+								strcat(sendbuff,"mA;");
+							}				
 							sendbuff3[6] = 0xff;
 							sendbuff3[7] = 0xff;
 							sendbuff3[8] = 0xff;
@@ -1568,7 +1683,7 @@ void Test_Process(void)
 					}
 					else{
 						Disp_StrAt("-----");//显示测试值
-						strcat(sendbuff,"-----");
+						strcat(sendbuff,">9999");
 						sendbuff2[6] = 0xff;
 						sendbuff2[7] = 0xff;
 						sendbuff2[8] = 0xff;
@@ -1578,8 +1693,8 @@ void Test_Process(void)
 //					sendbuff2[6] = USENDI.s[0];
 //					sendbuff2[7] = USENDI.s[1];
 //					sendbuff2[8] = USENDI.s[2];
-//					sendbuff2[9] = USENDI.s[3];
-					strcat(sendbuff,(char*)"MΩ;");
+//					sendbuff2[9] = USENDI.s[3];Ω
+					strcat(sendbuff,(char*)"M;");
 					sendbuff2[10] = (u8)(Test_value.Test_Time >> 8);
 					sendbuff2[11] = (u8)(Test_value.Test_Time);
 					break;
@@ -1587,16 +1702,23 @@ void Test_Process(void)
 				case W_ISETUP:
 					if(run_stemp==0)
 					{
+						multstep = 1;
 						if(SaveData.Setup.Output>Voltage)
 						{
 							if(SaveData.Setup.Output-Voltage<=2)
+							{
 								Voltage=SaveData.Setup.Output;
+								f_sort=TRUE;//分选标志
+							}
 						
 						}
 						else
 						{
 							if(Voltage-SaveData.Setup.Output<=2)
+							{
 								Voltage=SaveData.Setup.Output;
+								f_sort=TRUE;//分选标志
+							}
 						}
 						Hex_Format(Voltage,2,3,TRUE);//数据格式化到DispBuf
 						Disp_StrAt(DispBuf);//显示测试值
@@ -1608,7 +1730,14 @@ void Test_Process(void)
 						
 						LcdAddr.x=9;
 						Hex_Format(Test_value.Test_I,2,4,TRUE);//数据格式化到DispBuf
-						
+						if(Test_value.Test_I < 1000)
+						{
+							DispBuf[0] = DispBuf[1];
+							DispBuf[1] = DispBuf[2];
+							DispBuf[2] = DispBuf[3];
+							DispBuf[3] = DispBuf[4];
+							DispBuf[4] = 0;
+						}
 //						if(Current!=TEST_VALUE_OVER)
 //						{
 //							Disp_StrAt(DispBuf);//显示测试值
@@ -1638,29 +1767,38 @@ void Test_Process(void)
 ////						strcat(sendbuff,(char*)DispBuf);
 //						strcat(sendbuff,"mA;");
 						strcat(sendbuff,(char*)DispBuf);
-						DispBuf[0] = DispBuf[1];
-						DispBuf[1] = DispBuf[2];
-						DispBuf[2] = DispBuf[3];
-						DispBuf[3] = DispBuf[4];
-						DispBuf[4] = 0;
-						if(GetSystemMessage()!=MSG_OVER/*Current!=TEST_VALUE_OVER*/)
+						strcat(sendbuff,"mA;");
+						if(GetSystemMessage()!=MSG_OVER && GetSystemMessage()!=MSG_OFL/*Current!=TEST_VALUE_OVER*/)
 						{
 							Disp_StrAt(DispBuf);//显示测试值
 							USENDI.sendI = atof(DispBuf);
-							Disp_Str((u8*)"mA");
+							if(Test_value.Test_I < 1000)
+							{
+								Disp_Str((u8*)" mA");
+							}else{
+								Disp_Str((u8*)"mA");
+							}
 							sendbuff2[6] = USENDI.s[0];
 							sendbuff2[7] = USENDI.s[1];
 							sendbuff2[8] = USENDI.s[2];
 							sendbuff2[9] = USENDI.s[3];
-							strcat(sendbuff,"mA;");
+							
 						}
 						else
 						{
-	//						memcpy(DispBuf,"-----",5);
-							memcpy(DispBuf,"OFLA ",5);
-							//Disp_StrAt("-----");//显示测试值
-							Disp_StrAt(DispBuf);	
-							Disp_Str((u8*)"  ");
+							if(GetSystemMessage()==MSG_OFL)
+							{
+		//						memcpy(DispBuf,"-----",5);
+								memcpy(DispBuf,"OFL ",5);
+								//Disp_StrAt("-----");//显示测试值
+								Disp_StrAt(DispBuf);
+								Disp_Str((u8*)"  ");
+							}else if(GetSystemMessage()==MSG_OVER){
+								memcpy(DispBuf,"BRK ",5);
+								//Disp_StrAt("-----");//显示测试值
+								Disp_StrAt(DispBuf);
+								Disp_Str((u8*)"  ");
+							}	
 							sendbuff2[6] = 0xff;
 							sendbuff2[7] = 0xff;
 							sendbuff2[8] = 0xff;
@@ -1672,6 +1810,8 @@ void Test_Process(void)
 					}
 					else
 					{
+						multstep = 2;
+//						strcat(sendbuff,(char*)"PASS");
 						if(SaveData.Setup.I_Volt>Voltage)
 						{
 							if(SaveData.Setup.I_Volt-Voltage<=2)
@@ -1711,7 +1851,7 @@ void Test_Process(void)
 						if(Resistance!=TEST_VALUE_OVER)
 						{
 							Disp_StrAt(DispBuf);//显示测试值
-							strcat(sendbuff,(char*)DispBuf);
+							strcat(sendbuff1,(char*)DispBuf);
 							USENDI.sendI = atof(DispBuf);
 							sendbuff3[6] = USENDI.s[0];
 							sendbuff3[7] = USENDI.s[1];
@@ -1720,7 +1860,7 @@ void Test_Process(void)
 						}
 						else{
 							Disp_StrAt("-----");//显示测试值
-							strcat(sendbuff1,"-----");
+							strcat(sendbuff1,">9999");
 							sendbuff3[6] = 0xff;
 							sendbuff3[7] = 0xff;
 							sendbuff3[8] = 0xff;
@@ -1740,8 +1880,8 @@ void Test_Process(void)
 //						strcat(sendbuff,(char*)DispBuf);
 //						strcat(sendbuff,(char*)"MΩ;");
 						
-//						strcat(sendbuff1,(char*)DispBuf);
-						strcat(sendbuff1,(char*)"MΩ;");
+//						strcat(sendbuff1,(char*)DispBuf);Ω
+						strcat(sendbuff1,(char*)"M;");
 						sendbuff3[10] = (u8)(Test_value.Test_Time >> 8);
 						sendbuff3[11] = (u8)(Test_value.Test_Time);
 					}
@@ -1768,7 +1908,10 @@ void Test_Process(void)
 			}
 		}
 		
-		Uart_Process();//串口处理
+		if(ComBuf.rec.end == TRUE)
+		{
+			Uart_Process();//串口处理
+		}
 
 		key=Key_Read();//读取按键
 		switch(key)
@@ -1968,7 +2111,10 @@ void TestPause_Process(void)
 			SetSystemStatus(SYS_STATUS_TEST);//系统状态-测试开始，连接下一个步骤
 		}
 
-		Uart_Process();//串口处理
+		if(ComBuf.rec.end == TRUE)
+		{
+			Uart_Process();//串口处理
+		}
 		
 		key=Key_Read_WithTimeOut(TICKS_PER_SEC_SOFTTIMER/20);//等待按键(100*10ms/20=50ms)
 		switch(key)
@@ -2102,7 +2248,10 @@ void TestFinish_Process(void)
 			
 		}
 
-		Uart_Process();//串口处理
+		if(ComBuf.rec.end == TRUE)
+		{
+			Uart_Process();//串口处理
+		}
 		key=Key_Read_WithTimeOut(TICKS_PER_SEC_SOFTTIMER/50);//等待按键(100*10ms/50=20ms)
 		switch(key)
 		{
@@ -2410,10 +2559,10 @@ if(SaveData.pselect == 0)//通讯协议1
 				switch (GetSystemMessage())//系统信息
 				{
 					case MSG_IDLE:
-						memcpy(strbuff,"IDEL",5);
+						memcpy(strbuff,"----",5);
 						break;
 					case MSG_PAUSE:
-						memcpy(strbuff,"STOP",5);
+						memcpy(strbuff,"----",5);
 						//kind=0x9B;//测试中止
 						break;
 					case MSG_PASS:
@@ -2434,45 +2583,125 @@ if(SaveData.pselect == 0)//通讯协议1
 					case MSG_ARC:
 						memcpy(strbuff,"ARC ",5);
 						break;
+					case MSG_OFL://过流报警
+						memcpy(strbuff,"HIGH",5);
+						break;
 					default:
 						//kind=0x90;//正常测试
 						memcpy(strbuff,"TEST",5);
 						break;
 				}	
-				memset(ComBuf.send.buf,0,40);
-//				ComBuf.send.buf[0]=0xAA;
-//				ComBuf.send.begin=FALSE;
-				memcpy(&ComBuf.send.buf[0],sendbuff,16);
-				strcat((char*)ComBuf.send.buf,(char*)strbuff);
-				strcat((char*)ComBuf.send.buf,(char*)sendend);//尾部增加回车和换行符
 				
-				for(i=0;i<20;i++)
-				{
-					USART_SendData(USART1, ComBuf.send.buf[i]);
-					while(USART_GetFlagStatus(USART1,USART_FLAG_TXE)==RESET);
-				}
+				
 
-				if(Test_mid.set_item == W_ISETUP || Test_mid.set_item == I_WSETUP)
+				if(SaveData.Setup.Group_Item == W_ISETUP || SaveData.Setup.Group_Item == I_WSETUP)
 				{
-//					memset(ComBuf1.send.buf,0,21);
-//					ComBuf1.send.buf[0]=0xAA;
-//					ComBuf1.send.begin=FALSE;
-//					memcpy(&ComBuf1.send.buf[1],sendbuff1,16);
-					strcat((char*)ComBuf.send.buf,(char*)sendbuff1);
-					strcat((char*)ComBuf.send.buf,(char*)strbuff);
-					strcat((char*)ComBuf.send.buf,(char*)sendend);//尾部增加回车和换行符
-					for(i=0;i<39;i++)
+					if(sendflag == 0)
 					{
-						USART_SendData(USART1, ComBuf1.send.buf[i]);
+						sendflag = 1;
+						memset(ComBuf.send.buf,0,40);
+		//				ComBuf.send.buf[0]=0xAA;
+		//				ComBuf.send.begin=FALSE;
+						if(GetSystemMessage() == MSG_IDLE)
+						{
+							strcat((char*)ComBuf.send.buf,(char*)sendbuff);
+	//						memcpy(&ComBuf.send.buf[0],sendbuff,14);
+							strcat((char*)ComBuf.send.buf,(char*)strbuff);
+						}else{
+							if(multstep == 1)
+							{
+								strcat((char*)ComBuf.send.buf,(char*)sendbuff);
+	//							memcpy(&ComBuf.send.buf[0],sendbuff,14);
+								if(SaveData.Setup.Group_Item == W_ISETUP)
+								{
+									strcat((char*)ComBuf.send.buf,(char*)strbuff);
+								}else if(SaveData.Setup.Group_Item == I_WSETUP){
+									strcat((char*)ComBuf.send.buf,"----");
+								}
+							}else{
+								if(SaveData.Setup.Group_Item == W_ISETUP)
+								{
+									if(sendbuff[13] == 0x3b)
+									{
+										memcpy(&sendbuff[14],"PASS",4);
+									}else if(sendbuff[14] == 0x3b){
+										memcpy(&sendbuff[15],"PASS",4);
+									}
+//									strcat((char*)sendbuff,"PASS");
+									memcpy(&ComBuf.send.buf[0],sendbuff,18);
+								}else if(SaveData.Setup.Group_Item == I_WSETUP){
+//									strcat((char*)sendbuff,"mA;");
+									if(sendbuff[13] == 0x3b)
+									{
+										memcpy(&sendbuff[14],strbuff,4);
+									}else if(sendbuff[14] == 0x3b){
+										memcpy(&sendbuff[15],strbuff,4);
+									}
+//									strcat((char*)sendbuff,(char*)strbuff);
+									strcat((char*)ComBuf.send.buf,(char*)sendbuff);
+//									memcpy(&ComBuf.send.buf[0],sendbuff,18);
+								}							
+							}
+						}
+	//					memset(ComBuf1.send.buf,0,21);
+	//					ComBuf1.send.buf[0]=0xAA;
+	//					ComBuf1.send.begin=FALSE;
+	//					memcpy(&ComBuf1.send.buf[1],sendbuff1,16);
+						
+						strcat((char*)ComBuf.send.buf,";");
+						strcat((char*)ComBuf.send.buf,(char*)sendbuff1);
+						if(multstep == 1)
+						{
+	//						strcat((char*)ComBuf.send.buf,"----");
+							if(SaveData.Setup.Group_Item == W_ISETUP)
+							{
+								strcat((char*)ComBuf.send.buf,"----");
+							}else if(SaveData.Setup.Group_Item == I_WSETUP){
+								strcat((char*)ComBuf.send.buf,(char*)strbuff);
+							}
+						}else{
+							if(SaveData.Setup.Group_Item == W_ISETUP)
+							{
+								strcat((char*)ComBuf.send.buf,(char*)strbuff);
+							}else if(SaveData.Setup.Group_Item == I_WSETUP){
+								strcat((char*)ComBuf.send.buf,"PASS");
+							}
+							
+						}
+						strcat((char*)ComBuf.send.buf,(char*)sendend);//尾部增加回车和换行符
+						for(i=0;i<39;i++)
+						{
+							USART_SendData(USART1, ComBuf.send.buf[i]);
+							while(USART_GetFlagStatus(USART1,USART_FLAG_TXE)==RESET);
+						}
+						ComBuf.rec.end=FALSE;//接收缓冲可读标志复位
+	//					USART_SendData(USART1, 0xBB);
+	//					while(USART_GetFlagStatus(USART1,USART_FLAG_TXE)==RESET);
+
+	//					break;
+					}else{
+						for(i=0;i<39;i++)
+						{
+							USART_SendData(USART1, ComBuf.send.buf[i]);
+							while(USART_GetFlagStatus(USART1,USART_FLAG_TXE)==RESET);
+						}
+						ComBuf.rec.end=FALSE;//接收缓冲可读标志复位
+					}
+				}else{
+					memset(ComBuf.send.buf,0,40);
+	//				ComBuf.send.buf[0]=0xAA;
+	//				ComBuf.send.begin=FALSE;
+					memcpy(&ComBuf.send.buf[0],sendbuff,14);
+					strcat((char*)ComBuf.send.buf,(char*)strbuff);
+					
+					strcat((char*)ComBuf.send.buf,(char*)sendend);//尾部增加回车和换行符
+					
+					for(i=0;i<20;i++)
+					{
+						USART_SendData(USART1, ComBuf.send.buf[i]);
 						while(USART_GetFlagStatus(USART1,USART_FLAG_TXE)==RESET);
 					}
-//					USART_SendData(USART1, 0xBB);
-					while(USART_GetFlagStatus(USART1,USART_FLAG_TXE)==RESET);
-
-					break;
 				}
-				
-				
 				
 
 				
@@ -2565,6 +2794,7 @@ if(SaveData.pselect == 0)//通讯协议1
 
 			default:
 				break;
+			
 		}
 //	Disp_Idle_Menu();//显示待测界面
 	}

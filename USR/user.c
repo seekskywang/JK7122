@@ -434,6 +434,8 @@ const u8 MsgTab[][6+1]=
 	{"Hi-F  "},
 	{"Lo-F  "},
 	{"OVER  "},
+	{"      "},
+	{"OFL   "},
 	
 };
 
@@ -453,20 +455,20 @@ const u8 MsgTab[][6+1]=
 const u8 FactoryTabS[][20+1]=
 {	
 //	{"                "},//型号
-////	{"     JINKO      "},//型号
-//	{" 7122  VER:2.12 "},//名称
-//	{" Tel:0519-88226706  "},//电话
-//	{" Fax:0519-88226808  "},//传真
+	{"     JINKO      "},//型号
+	{" 7122  VER:2.XCY"},//名称
+	{" Tel:0519-88226706  "},//电话
+	{" Fax:0519-88226808  "},//传真
 	{" "},//主页
 };
 
 const u8 FactoryTab[][20+1]=
 {	
 //	{"                "},//型号
-////	{"     JINKO      "},//型号
-//	{" 7122  VER:2.12S"},//名称
-//	{" Tel:0519-88226706  "},//电话
-//	{" Fax:0519-88226808  "},//传真
+	{"     JINKO      "},//型号
+	{" 7122  VER:2.XCY"},//名称
+	{" Tel:0519-88226706  "},//电话
+	{" Fax:0519-88226808  "},//传真
 	{" "},//主页
 };
 //2.11增加绝缘1G校准点
@@ -1666,8 +1668,21 @@ void Disp_Idle_Menu(void)
 	Disp_Str((u8*)"kV");
 	
 	memset(sendbuff,0,20);
-	memcpy(sendbuff,DispBuf,4);
+	memcpy(sendbuff,"0.00",4);
 	strcat(sendbuff,"kV;");
+	if(/*SaveData.Setup.Group_Item==3||*/SaveData.Setup.Group_Item==3)//绝缘电阻
+	{
+		Hex_Format((u16)SaveData.Setup.Output,2,3,FALSE);//显示测试时间
+		memset(sendbuff1,0,20);
+		memcpy(sendbuff1,"0.00",4);
+		strcat(sendbuff1,"kV;");
+	}else if(/*SaveData.Setup.Group_Item==3||*/SaveData.Setup.Group_Item==2){//绝缘电阻{
+		Hex_Format((u16)SaveData.Setup.I_Volt,2,3,FALSE);//显示测试时间
+		memset(sendbuff1,0,20);
+		memcpy(sendbuff1,"0.00",4);
+		strcat(sendbuff1,"kV;");
+	}
+
 	if(SaveData.Setup.Item==0 && SaveData.Setup.Group_Item != I_WSETUP)//AC 注意  设置的时候 绝缘电阻要固定为DC
 		Disp_Str((u8*)"AC");
 	else
@@ -1681,9 +1696,14 @@ void Disp_Idle_Menu(void)
 		Disp_StrAt(DispBuf);
 		Disp_Str((u8*)"M");
 		Lcd_WriteData(OHM);
-		strcat(sendbuff,(char*)DispBuf);
-		strcat(sendbuff,"MΩ;");
-		
+		strcat(sendbuff1,"  0.0");
+		strcat(sendbuff1,"M;");
+		if(SaveData.Setup.Group_Item==3)
+		{
+			Hex_Format((u16)SaveData.Setup.High,2,4,FALSE);//显示测试时间
+			strcat(sendbuff,"0.00");
+			strcat(sendbuff,"mA;");
+		}
 	}
 	else
 	{
@@ -1691,8 +1711,14 @@ void Disp_Idle_Menu(void)
 		Hex_Format((u16)SaveData.Setup.High,2,4,FALSE);//显示测试时间
 		Disp_StrAt(DispBuf);
 		Disp_Str((u8*)"mA");
-		strcat(sendbuff,(char*)DispBuf);
+		strcat(sendbuff,"0.00");
 		strcat(sendbuff,"mA;");
+		if(SaveData.Setup.Group_Item==2)
+		{
+			Hex_Format((u16)SaveData.Setup.I_High,2,4,FALSE);//显示测试时间
+			strcat(sendbuff1,"  0.0");
+			strcat(sendbuff1,"M;");
+		}
 	}
 		
 

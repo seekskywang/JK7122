@@ -42,6 +42,9 @@
 //最小分选时间--0.2s
 #define SORT_TIME_MIN		(2)
 extern char sendbuff[20];
+extern char sendbuff1[20];
+extern char sendbuff2[20];
+extern char sendbuff3[20];
 //==========================================================
 //函数列表
 void Power_Process(void);//上电处理

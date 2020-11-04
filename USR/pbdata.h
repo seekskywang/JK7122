@@ -318,6 +318,7 @@ enum SysMessageEnum_I
 	MSG_LOW , 
 	MSG_OVER , 
 	MSG_ERROR ,
+	MSG_OFL ,
 };
 
 //上位机返回状态消息
