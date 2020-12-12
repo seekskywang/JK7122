@@ -40,7 +40,7 @@
 #define GND_RESISTANCE_MAX	(310)
 
 //最小分选时间--0.2s
-#define SORT_TIME_MIN		(2)
+#define SORT_TIME_MIN		(6)
 extern char sendbuff[20];
 extern char sendbuff1[20];
 extern char sendbuff2[20];

@@ -923,9 +923,16 @@ void Test_Process(void)
 				{
 					if(Test_value.Test_Time>=Test_mid.set_time)//测试时间判别
 					{
-						SetSystemStatus(SYS_STATUS_TEST_PAUSE);//测试暂停状态
-						SetSystemMessage(MSG_PASS);//系统信息-测试合格
-						f_msgdisp=TRUE;//消息显示标志
+						if(Voltage < SaveData.Setup.Output*0.8)
+						{
+							f_sort=TRUE;//分选标志
+							SetSystemMessage(MSG_LOW);
+							sendbuff2[2] = W_F_LO;
+						}else{
+							SetSystemStatus(SYS_STATUS_TEST_PAUSE);//测试暂停状态
+							SetSystemMessage(MSG_PASS);//系统信息-测试合格
+							f_msgdisp=TRUE;//消息显示标志
+						}
 					}
 				}
 			}
@@ -1497,7 +1504,7 @@ void Test_Process(void)
 							sendbuff2[9] = USENDI.s[3];
 						}
 						else{
-							Disp_StrAt("-----");//显示测试值
+							Disp_StrAt(">9999");//显示测试值
 							strcat(sendbuff1,">9999");
 							sendbuff2[6] = 0xff;
 							sendbuff2[7] = 0xff;
@@ -1682,7 +1689,7 @@ void Test_Process(void)
 						sendbuff2[9] = USENDI.s[3];
 					}
 					else{
-						Disp_StrAt("-----");//显示测试值
+						Disp_StrAt(">9999");//显示测试值
 						strcat(sendbuff,">9999");
 						sendbuff2[6] = 0xff;
 						sendbuff2[7] = 0xff;
@@ -1859,7 +1866,8 @@ void Test_Process(void)
 							sendbuff3[9] = USENDI.s[3];
 						}
 						else{
-							Disp_StrAt("-----");//显示测试值
+							Disp_StrAt(">9999");//显示测试值
+//							Disp_StrAt("-----");//显示测试值
 							strcat(sendbuff1,">9999");
 							sendbuff3[6] = 0xff;
 							sendbuff3[7] = 0xff;
