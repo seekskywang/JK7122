@@ -923,7 +923,7 @@ void Test_Process(void)
 				{
 					if(Test_value.Test_Time>=Test_mid.set_time)//测试时间判别
 					{
-						if(Voltage < SaveData.Setup.Output*0.8)
+						if(Voltage < SaveData.Setup.Output*0.5)
 						{
 							f_sort=TRUE;//分选标志
 							SetSystemMessage(MSG_LOW);
