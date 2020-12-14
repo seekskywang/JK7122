@@ -418,7 +418,7 @@ typedef struct
 //==========================================================
 //系统项(2项)
 typedef struct 
-{
+{ 
 	vu16 value;	//数值
 	vu8 dot;	//小数点 0 1 2 3    xxxx   xxx.x  xx.xx x.xxx
 	vu8 unit;	//单位 0 1 2 3   MΩ    GΩ   TΩ  

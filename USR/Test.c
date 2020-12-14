@@ -881,7 +881,7 @@ void Test_Process(void)
 	Test_Time=0;
 	Test_value.Test_Time=0;
 	TestOut=0;
-	Range=0;
+	Range=max;
 	Range_Control(Range+ra_flag);
 	while(GetSystemStatus()==SYS_STATUS_TEST)
 	{
@@ -923,15 +923,31 @@ void Test_Process(void)
 				{
 					if(Test_value.Test_Time>=Test_mid.set_time)//测试时间判别
 					{
-						if(Voltage < SaveData.Setup.Output*0.5)
+						if(Test_mid.set_item == W_SETUP 
+						|| (Test_mid.set_item == W_ISETUP && run_stemp == 0)
+						|| (Test_mid.set_item == I_WSETUP && run_stemp == 1))
 						{
-							f_sort=TRUE;//分选标志
-							SetSystemMessage(MSG_LOW);
-							sendbuff2[2] = W_F_LO;
+							if(Voltage < SaveData.Setup.Output*0.8)
+							{
+								f_sort=TRUE;//分选标志
+								SetSystemMessage(MSG_LOW);
+								sendbuff2[2] = W_F_LO;
+							}else{
+								SetSystemStatus(SYS_STATUS_TEST_PAUSE);//测试暂停状态
+								SetSystemMessage(MSG_PASS);//系统信息-测试合格
+								f_msgdisp=TRUE;//消息显示标志
+							}
 						}else{
-							SetSystemStatus(SYS_STATUS_TEST_PAUSE);//测试暂停状态
-							SetSystemMessage(MSG_PASS);//系统信息-测试合格
-							f_msgdisp=TRUE;//消息显示标志
+							if(Voltage < SaveData.Setup.I_Volt*0.8)
+							{
+								f_sort=TRUE;//分选标志
+								SetSystemMessage(MSG_LOW);
+								sendbuff2[2] = W_F_LO;
+							}else{
+								SetSystemStatus(SYS_STATUS_TEST_PAUSE);//测试暂停状态
+								SetSystemMessage(MSG_PASS);//系统信息-测试合格
+								f_msgdisp=TRUE;//消息显示标志
+							}
 						}
 					}
 				}
@@ -953,7 +969,7 @@ void Test_Process(void)
 		//读取A/D值
 		Read_Ad();//读取AD值
 		Ad_Filter();//AD值滤波
-		Get_Result();//计算测试值		
+		Get_Result();//计算测试值
 		//量程自动换挡处理
 		if(Current>rangr_limit_high)//高于量程上限
 		{
@@ -1036,7 +1052,7 @@ void Test_Process(void)
 						Resistance=TEST_VALUE_OVER;//电阻溢出
 					}
 					if(f_switch==FALSE)
-					if(sortT>=SORT_TIME_MIN)//超过最小时间后才开始分选
+					if(Test_value.Test_Time>=SORT_TIME_MIN)//超过最小时间后才开始分选
 					f_sort=TRUE;//分选标志
 					break;
 		
@@ -1054,7 +1070,7 @@ void Test_Process(void)
 							Resistance=TEST_VALUE_OVER;//电阻溢出
 						}
 						if(f_switch==FALSE)
-						if(sortT>=SORT_TIME_MIN)//超过最小时间后才开始分选
+						if(Test_value.Test_Time>=SORT_TIME_MIN)//超过最小时间后才开始分选
 							f_sort=TRUE;//分选标志
 						
 					}
@@ -1120,7 +1136,7 @@ void Test_Process(void)
 							Resistance=TEST_VALUE_OVER;//电阻溢出
 						}
 						if(f_switch==FALSE)
-						if(sortT>=SORT_TIME_MIN)//超过最小时间后才开始分选
+						if(Test_value.Test_Time>=SORT_TIME_MIN)//超过最小时间后才开始分选
 							f_sort=TRUE;//分选标志
 					
 					}
