@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\output\LY-STM32.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\output\LY-STM32.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Dec 14 09:08:29 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu Dec 17 15:07:36 2020
 <BR><P>
 <H3>Maximum Stack Usage =        312 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -811,7 +811,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Test_Process
 </UL>
 
-<P><STRONG><a name="[56]"></a>Test_Process</STRONG> (Thumb, 5294 bytes, Stack size 80 bytes, test.o(.text))
+<P><STRONG><a name="[56]"></a>Test_Process</STRONG> (Thumb, 5216 bytes, Stack size 80 bytes, test.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 304<LI>Call Chain = Test_Process &rArr; atof &rArr; __strtod_int &rArr; _local_sscanf &rArr; _scanf_real
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
@@ -851,7 +851,7 @@ Global Symbols
 <LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TestFinish_Process
 </UL>
 
-<P><STRONG><a name="[57]"></a>TestPause_Process</STRONG> (Thumb, 550 bytes, Stack size 24 bytes, test.o(.text))
+<P><STRONG><a name="[57]"></a>TestPause_Process</STRONG> (Thumb, 546 bytes, Stack size 24 bytes, test.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 184<LI>Call Chain = TestPause_Process &rArr; Uart_Process &rArr; Disp_Idle_Menu &rArr; Disp_StrAt &rArr; Disp_Str &rArr; Lcd_WriteData &rArr; Lcd_AddrUpdate &rArr; Lcd_SetAddr &rArr; Lcd_WriteCmd &rArr; Lcd_ReadBF
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Beep_One

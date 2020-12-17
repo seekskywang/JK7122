@@ -755,7 +755,7 @@ void Test_Process(void)
 	vu8 stepT;//步进时间计时
 	vu8 blinkT;//闪烁时间计时
 //	char sendbuff[20];
-	vu16 dat;
+	vu32 dat;
 	vu32 temp;
 
 	bool f_disp=FALSE;//显示更新标志

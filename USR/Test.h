@@ -31,7 +31,7 @@
 //#define MSG_ADDR_X			(DATA_ADDR_X+WIDTH_OF_VALUE*3+1)
 
 //测试值溢出
-#define TEST_VALUE_OVER		(0xffff)
+#define TEST_VALUE_OVER		(99999)
 
 //测试值最大值
 #define ACW_CURRENT_MAX		(1200)
