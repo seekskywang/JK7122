@@ -36,7 +36,7 @@
 //测试值最大值
 #define ACW_CURRENT_MAX		(1200)
 #define DCW_CURRENT_MAX		(550)
-#define IR_RESISTANCE_MAX	(0xffff)
+#define IR_RESISTANCE_MAX	(99999)
 #define GND_RESISTANCE_MAX	(310)
 
 //最小分选时间--0.2s
