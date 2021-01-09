@@ -11,7 +11,8 @@ int fputc(int ch,FILE *f)
 
 int main(void)
 {  	
-
+	NVIC_SetVectorTable(NVIC_VectTab_FLASH, 0x10000);
+	__enable_irq();
 	SetSystemStatus(SYS_STATUS_POWER);//开机上电状态
 
 	
