@@ -2852,6 +2852,8 @@ if(SaveData.pselect == 0)//通讯协议1
 					}else{
 						SetSystemStatus(SYS_STATUS_IDLE);//系统状态-待机
 					}
+				}else if(recbuf[4] == 'S'){//读数据命令
+					SendRes();
 				}
 			}else if(lenth == 3){
 				if(recbuf[4] == 't')//选择组别并测试命令
