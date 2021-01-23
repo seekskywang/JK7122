@@ -35,7 +35,7 @@
 #define POWERON_DISP_TIME ((u8)20)	//ø™ª˙œ‘ æΩÁ√Ê—” ±20*100mS=2S
 
 void SendRes(void);
-	
+void SendRes1(void);	
 const u8 IR_Range_dot[5]={3,2,1,0,0};
 char sendbuff[20];
 char sendbuff1[20];
@@ -1436,7 +1436,7 @@ void Test_Process(void)
 					if(GetSystemMessage()!=MSG_OVER && GetSystemMessage()!=MSG_OFL/*Current!=TEST_VALUE_OVER*/)
 					{
 						Disp_StrAt(DispBuf);//œ‘ æ≤‚ ‘÷µ
-						USENDI.sendI = atof(DispBuf);
+						USENDI.sendI = atof(DispBuf)*100;
 						if(Test_value.Test_I < 1000)
 						{
 							Disp_Str((u8*)" mA");
@@ -1464,10 +1464,10 @@ void Test_Process(void)
 							Disp_StrAt(DispBuf);
 							Disp_Str((u8*)"  ");
 						}
-						sendbuff2[6] = 0xff;
-						sendbuff2[7] = 0xff;
-						sendbuff2[8] = 0xff;
-						sendbuff2[9] = 0xff;
+						sendbuff2[6] = 0;
+						sendbuff2[7] = 0;
+						sendbuff2[8] = 0;
+						sendbuff2[9] = 0;
 					}
 					
 					
@@ -1521,11 +1521,16 @@ void Test_Process(void)
 						}
 						else{
 							Disp_StrAt(">9999");//œ‘ æ≤‚ ‘÷µ
-							strcat(sendbuff1,">9999");
-							sendbuff2[6] = 0xff;
-							sendbuff2[7] = 0xff;
-							sendbuff2[8] = 0xff;
-							sendbuff2[9] = 0xff;
+							strcat(sendbuff1,">999");
+							USENDI.sendI = 10000;
+							sendbuff2[6] = USENDI.s[0];
+							sendbuff2[7] = USENDI.s[1];
+							sendbuff2[8] = USENDI.s[2];
+							sendbuff2[9] = USENDI.s[3];
+//							sendbuff2[6] = 0xff;
+//							sendbuff2[7] = 0xff;
+//							sendbuff2[8] = 0xff;
+//							sendbuff2[9] = 0xff;
 						}
 						
 //						USENDI.sendI = atof(DispBuf);					
@@ -1588,7 +1593,7 @@ void Test_Process(void)
 						if(GetSystemMessage()!=MSG_OVER && GetSystemMessage()!=MSG_OFL/*Current!=TEST_VALUE_OVER*/)
 						{
 							Disp_StrAt(DispBuf);//œ‘ æ≤‚ ‘÷µ
-							USENDI.sendI = atof(DispBuf);
+							USENDI.sendI = atof(DispBuf)*100;
 							if(Test_value.Test_I < 1000)
 							{
 								Disp_Str((u8*)" mA");
@@ -1618,10 +1623,10 @@ void Test_Process(void)
 								Disp_Str((u8*)"  ");
 								strcat(sendbuff,"mA;");
 							}				
-							sendbuff3[6] = 0xff;
-							sendbuff3[7] = 0xff;
-							sendbuff3[8] = 0xff;
-							sendbuff3[9] = 0xff;
+							sendbuff3[6] = 0;
+							sendbuff3[7] = 0;
+							sendbuff3[8] = 0;
+							sendbuff3[9] = 0;
 						}
 					
 						
@@ -1707,10 +1712,15 @@ void Test_Process(void)
 					else{
 						Disp_StrAt(">9999");//œ‘ æ≤‚ ‘÷µ
 						strcat(sendbuff,">9999");
-						sendbuff2[6] = 0xff;
-						sendbuff2[7] = 0xff;
-						sendbuff2[8] = 0xff;
-						sendbuff2[9] = 0xff;
+						USENDI.sendI = 10000;
+						sendbuff2[6] = USENDI.s[0];
+						sendbuff2[7] = USENDI.s[1];
+						sendbuff2[8] = USENDI.s[2];
+						sendbuff2[9] = USENDI.s[3];
+//						sendbuff2[6] = 0xff;
+//						sendbuff2[7] = 0xff;
+//						sendbuff2[8] = 0xff;
+//						sendbuff2[9] = 0xff;
 					}
 //					USENDI.sendI = atof(DispBuf);					
 //					sendbuff2[6] = USENDI.s[0];
@@ -1794,7 +1804,7 @@ void Test_Process(void)
 						if(GetSystemMessage()!=MSG_OVER && GetSystemMessage()!=MSG_OFL/*Current!=TEST_VALUE_OVER*/)
 						{
 							Disp_StrAt(DispBuf);//œ‘ æ≤‚ ‘÷µ
-							USENDI.sendI = atof(DispBuf);
+							USENDI.sendI = atof(DispBuf)*100;
 							if(Test_value.Test_I < 1000)
 							{
 								Disp_Str((u8*)" mA");
@@ -1822,10 +1832,10 @@ void Test_Process(void)
 								Disp_StrAt(DispBuf);
 								Disp_Str((u8*)"  ");
 							}	
-							sendbuff2[6] = 0xff;
-							sendbuff2[7] = 0xff;
-							sendbuff2[8] = 0xff;
-							sendbuff2[9] = 0xff;
+							sendbuff2[6] = 0;
+							sendbuff2[7] = 0;
+							sendbuff2[8] = 0;
+							sendbuff2[9] = 0;
 						}
 						
 						sendbuff2[10] = (u8)(Test_value.Test_Time >> 8);
@@ -1885,10 +1895,15 @@ void Test_Process(void)
 							Disp_StrAt(">9999");//œ‘ æ≤‚ ‘÷µ
 //							Disp_StrAt("-----");//œ‘ æ≤‚ ‘÷µ
 							strcat(sendbuff1,">9999");
-							sendbuff3[6] = 0xff;
-							sendbuff3[7] = 0xff;
-							sendbuff3[8] = 0xff;
-							sendbuff3[9] = 0xff;
+							USENDI.sendI = 10000;
+							sendbuff3[6] = USENDI.s[0];
+							sendbuff3[7] = USENDI.s[1];
+							sendbuff3[8] = USENDI.s[2];
+							sendbuff3[9] = USENDI.s[3];
+//							sendbuff3[6] = 0xff;
+//							sendbuff3[7] = 0xff;
+//							sendbuff3[8] = 0xff;
+//							sendbuff3[9] = 0xff;
 						}
 						
 //						USENDI.sendI = atof(DispBuf);					
@@ -1981,6 +1996,14 @@ void Test_Process(void)
 		}
 	}
 	run_stemp++;//◊ﬂ“ª≤Ω
+	if(run_stemp == 1)
+	{
+		if(Test_mid.set_item == W_ISETUP || Test_mid.set_item == I_WSETUP)
+		{
+			SendRes1();
+		}
+	}
+	
 	Plc_Start_Off();
 }
 
@@ -2222,10 +2245,19 @@ void TestFinish_Process(void)
 	f_disp=TRUE;//œ‘ æ±Í÷æ
 
 	Led_HV_Off();//πÿ±’∏ﬂ—πµ∆
-	if(respond == 1)
+	if(SaveData.Setup.Group_Item == W_ISETUP || SaveData.Setup.Group_Item == I_WSETUP)
 	{
-		SendRes();
-		respond = 0;
+		if(respond == 1 && run_stemp == 2)
+		{
+			SendRes();
+			respond = 0;
+		}
+	}else{
+		if(respond == 1)
+		{
+			SendRes();
+			respond = 0;
+		}
 	}
 //	Amp_Output_Off();//π¶∑≈ ‰≥ˆπÿ±’
 	while(GetSystemStatus()==SYS_STATUS_TEST_FINISH)
@@ -2509,11 +2541,11 @@ void SendRes(void)
 			}
 		}
 	}
-	for(i=0;i<12;i++)
-	{
-		USART_SendData(USART1, sendbuff2[i]);
-		while(USART_GetFlagStatus(USART1,USART_FLAG_TXE)==RESET);
-	}
+//	for(i=0;i<12;i++)
+//	{
+//		USART_SendData(USART1, sendbuff2[i]);
+//		while(USART_GetFlagStatus(USART1,USART_FLAG_TXE)==RESET);
+//	}
 	
 	if(Test_mid.set_item == I_WSETUP || Test_mid.set_item == W_ISETUP)
 	{
@@ -2522,9 +2554,164 @@ void SendRes(void)
 			USART_SendData(USART1, sendbuff3[i]);
 			while(USART_GetFlagStatus(USART1,USART_FLAG_TXE)==RESET);
 		}
+	}else{
+		for(i=0;i<12;i++)
+		{
+			USART_SendData(USART1, sendbuff2[i]);
+			while(USART_GetFlagStatus(USART1,USART_FLAG_TXE)==RESET);
+		}
 	}
 }
 
+void SendRes1(void)
+{
+	u8 i;
+	sendbuff2[0] = UART_SEND_BEGIN20;
+	sendbuff2[1] = UART_SEND_BEGIN21/*UART_SEND_BEGIN21*/;
+	sendbuff3[0] = UART_SEND_BEGIN20;
+	sendbuff3[1] = UART_SEND_BEGIN21/*UART_SEND_BEGIN21*/;
+	
+	U2.BIT_FLAG.ACWF = SaveData.Setup.Freq;//w_ma:d4
+	U2.BIT_FLAG.ARC = SaveData.Setup.Arc;//w_ma:d3d2d1d0,µÁª°
+	sendbuff2[3] = U2.w_ma;
+	sendbuff3[3] = U2.w_ma;
+	
+	if(!F_Fail)
+	{
+		if(Test_mid.set_item == W_SETUP/* || Test_mid.set_item == I_WSETUP*/)
+		{
+			switch(GetSystemMessage())
+			{
+				case MSG_PASS://ƒÕ—π≤‚ ‘Õ®π˝
+				{
+					sendbuff2[2] = W_PASS;
+				}break;
+				case MSG_PAUSE://ƒÕ—π≤‚ ‘÷’÷π
+				{
+					sendbuff2[2] = W_STOP;
+				}break;
+			}
+		}else if(Test_mid.set_item == I_SETUP/* || Test_mid.set_item == W_ISETUP*/){
+			switch(GetSystemMessage())
+			{
+				case MSG_PASS://ƒÕ—π≤‚ ‘Õ®π˝
+				{
+					sendbuff2[2] = I_PASS;
+				}break;
+				case MSG_PAUSE://æ¯‘µ≤‚ ‘÷’÷π
+				{
+					sendbuff2[2] = I_STOP;
+				}break;
+			}		
+		}else if(Test_mid.set_item == I_WSETUP){
+			switch(GetSystemMessage())
+			{
+				case MSG_PASS://ƒÕ—π≤‚ ‘Õ®π˝
+				{
+					sendbuff2[2] = I_PASS;
+					sendbuff3[2] = W_PASS;
+				}break;
+				case MSG_PAUSE://æ¯‘µ≤‚ ‘÷’÷π
+				{
+					if(run_stemp == 1)
+					{
+						sendbuff2[2] = I_STOP;
+					}else if(run_stemp == 2){
+						sendbuff3[2] = W_STOP;
+					}						
+				}break;
+			}
+			
+		}else if(Test_mid.set_item == W_ISETUP){
+			switch(GetSystemMessage())
+			{
+				case MSG_PASS://ƒÕ—π≤‚ ‘Õ®π˝
+				{
+					sendbuff2[2] = W_PASS;
+					sendbuff3[2] = I_PASS;
+				}break;
+				case MSG_PAUSE://æ¯‘µ≤‚ ‘÷’÷π
+				{
+					if(run_stemp == 1)
+					{
+						sendbuff2[2] = W_STOP;
+					}else if(run_stemp == 2){
+						sendbuff3[2] = I_STOP;
+					}			
+				}break;
+			}
+			
+		}
+	}
+	if(F_Fail)
+	{
+		if(Test_mid.set_item == W_ISETUP)
+		{
+			switch(GetSystemMessage())
+			{
+				case MSG_PASS://ƒÕ—π≤‚ ‘Õ®π˝
+				{
+					sendbuff2[2] = W_PASS;
+				}break;
+				case MSG_HIGH://ƒÕ—π¬©µÁπ˝¥Û
+				{
+					sendbuff2[2] = W_F_HI;
+				}break;
+				case MSG_LOW://ƒÕ—π¬©µÁπ˝–°
+				{
+					sendbuff2[2] = W_F_LO;
+				}break;
+				case MSG_PAUSE://ƒÕ—π≤‚ ‘÷’÷π
+				{
+					sendbuff2[2] = W_STOP;
+				}break;
+				case MSG_ARC://ƒÕ—πµÁª° ß∞‹
+				{
+					sendbuff2[2] = W_ARC;
+				}break;
+				case MSG_OVER://ƒÕ—π≤‚ ‘±¿¿£
+				{
+					sendbuff2[2] = W_OVER;
+				}break;
+			}
+
+		}else if(Test_mid.set_item == I_WSETUP){
+			switch(GetSystemMessage())
+			{
+				case MSG_PASS://æ¯‘µ≤‚ ‘Õ®π˝
+				{
+					sendbuff2[2] = I_PASS;
+				}break;
+				case MSG_HIGH://æ¯‘µµÁ◊Ëπ˝¥Û
+				{
+					sendbuff2[2] = I_HIGH;
+				}break;
+				case MSG_LOW://æ¯‘µµÁ◊Ëπ˝–°
+				{
+					sendbuff2[2] = I_LO;
+				}break;
+				case MSG_PAUSE://æ¯‘µ≤‚ ‘÷’÷π
+				{
+					sendbuff2[2] = I_STOP;
+				}break;
+			}
+		}
+	}
+	for(i=0;i<12;i++)
+	{
+		USART_SendData(USART1, sendbuff2[i]);
+		while(USART_GetFlagStatus(USART1,USART_FLAG_TXE)==RESET);
+	}
+	
+//	if(Test_mid.set_item == I_WSETUP || Test_mid.set_item == W_ISETUP)
+//	{
+//		for(i=0;i<12;i++)
+//		{
+//			USART_SendData(USART1, sendbuff3[i]);
+//			while(USART_GetFlagStatus(USART1,USART_FLAG_TXE)==RESET);
+//		}
+//	}
+}
 //==========================================================
 //∫Ø ˝√˚≥∆£∫Uart_Process
 //∫Ø ˝π¶ƒ‹£∫¥Æø⁄¥¶¿Ì
