@@ -94,6 +94,7 @@ extern vu8 RampStepTime;//缓升步进时间
 extern  vu16 TestOut;//测试输出值
 extern  vu16 FullOut;//满载输出值
 extern  u8 run_stemp;//运行步数   连接的时候用
+extern u8 sendcheck;
 //定义函数
 
 void RCC_HSE_Configuration(void);

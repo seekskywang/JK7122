@@ -120,7 +120,11 @@ void USART1_IRQHandler(void)
 					}
 				}
 			}
-		}		
+		}
+		if(ComBuf.rec.end == TRUE)
+		{
+			Uart_Process();//串口处理
+		}
 		//出厂协议设置命令
 		if(!FacBuf.rec.end)
 		{

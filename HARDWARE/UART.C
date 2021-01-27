@@ -1,5 +1,6 @@
 #include "pbdata.h"
 Com_TypeDef ComBuf;
+Com_TypeDef ComBufold;
 Com_TypeDef ComBuf1;
 Com_TypeDef FacBuf;
 void NVIC_Configuration(void)
@@ -10,7 +11,7 @@ void NVIC_Configuration(void)
 	//串口中断
 	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn; 
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0; 
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1; 
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0; 
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; 
 	NVIC_Init(&NVIC_InitStructure);
 	//定时器中断
