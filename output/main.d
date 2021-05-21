@@ -2,7 +2,7 @@
 .\output\main.o: USR\pbdata.h
 .\output\main.o: .\System\stm32f10x.h
 .\output\main.o: .\System\core_cm3.h
-.\output\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\main.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\output\main.o: .\System\system_stm32f10x.h
 .\output\main.o: .\Lib\inc\stm32f10x_conf.h
 .\output\main.o: .\Lib\inc\stm32f10x_gpio.h
@@ -16,7 +16,7 @@
 .\output\main.o: .\Lib\inc\stm32f10x_adc.h
 .\output\main.o: .\Lib\inc\stm32f10x_flash.h
 .\output\main.o: .\Lib\inc\stm32f10x_i2c.h
-.\output\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\output\main.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\output\main.o: .\HARDWARE\Lcd2002.h
 .\output\main.o: .\HARDWARE\gpio.h
 .\output\main.o: .\HARDWARE\24c256.h
@@ -32,7 +32,7 @@
 .\output\main.o: .\HARDWARE\keyboard.h
 .\output\main.o: USR\user.h
 .\output\main.o: USR\test.h
-.\output\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\output\main.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\output\main.o: .\HARDWARE\flash_eerom.h
 .\output\main.o: .\HARDWARE\Hardware.h
 .\output\main.o: .\HARDWARE\Beep.h

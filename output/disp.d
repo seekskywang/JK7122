@@ -1,9 +1,9 @@
 .\output\disp.o: HARDWARE\Disp.c
-.\output\disp.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\output\disp.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\output\disp.o: .\USR\pbdata.h
 .\output\disp.o: .\System\stm32f10x.h
 .\output\disp.o: .\System\core_cm3.h
-.\output\disp.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\disp.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\output\disp.o: .\System\system_stm32f10x.h
 .\output\disp.o: .\Lib\inc\stm32f10x_conf.h
 .\output\disp.o: .\Lib\inc\stm32f10x_gpio.h
@@ -17,7 +17,7 @@
 .\output\disp.o: .\Lib\inc\stm32f10x_adc.h
 .\output\disp.o: .\Lib\inc\stm32f10x_flash.h
 .\output\disp.o: .\Lib\inc\stm32f10x_i2c.h
-.\output\disp.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\output\disp.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\output\disp.o: .\HARDWARE\Lcd2002.h
 .\output\disp.o: .\HARDWARE\gpio.h
 .\output\disp.o: .\HARDWARE\24c256.h

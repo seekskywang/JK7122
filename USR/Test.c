@@ -3031,7 +3031,14 @@ if(SaveData.pselect == 0)//通讯协议1
 				Store_set_flash();
 				Disp_Idle_Menu();//显示待测界面
 				break;
-
+			case FRAME_SELECT_GROUP:
+				SaveData.Group=sec_king-1;
+				SaveGroup();
+				SetSystemStatus(SYS_STATUS_IDLE);//待机状态
+				ReadSetByGroup();
+				Parameter_valuecomp();//比较设置参数
+				Disp_Idle_Menu();//显示待测界面
+				break;		
 			default:
 				break;
 			

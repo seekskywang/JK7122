@@ -67,6 +67,7 @@ extern  Com_TypeDef FacBuf;
 #define FRAME_ITEM				(0xDE)	//设置测试项目
 #define FRAME_CLR_BOOT_NUM		(0xF2)	//清开机次数帧
 #define FRAME_WRITE_SN			(0xF3)	//写序列号帧
+#define FRAME_SELECT_GROUP		(0xF4)	//选择组别
 
 //帧位置定义
 #define PFRAMEHEAD				(0)	//帧头位置

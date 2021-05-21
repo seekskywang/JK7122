@@ -1,11 +1,11 @@
 .\output\debug.o: USR\Debug.c
-.\output\debug.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-.\output\debug.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\output\debug.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\output\debug.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\output\debug.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\output\debug.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\output\debug.o: USR\pbdata.h
 .\output\debug.o: .\System\stm32f10x.h
 .\output\debug.o: .\System\core_cm3.h
-.\output\debug.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\debug.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\output\debug.o: .\System\system_stm32f10x.h
 .\output\debug.o: .\Lib\inc\stm32f10x_conf.h
 .\output\debug.o: .\Lib\inc\stm32f10x_gpio.h

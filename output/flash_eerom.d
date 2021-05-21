@@ -2,7 +2,7 @@
 .\output\flash_eerom.o: .\USR\pbdata.h
 .\output\flash_eerom.o: .\System\stm32f10x.h
 .\output\flash_eerom.o: .\System\core_cm3.h
-.\output\flash_eerom.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\flash_eerom.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\output\flash_eerom.o: .\System\system_stm32f10x.h
 .\output\flash_eerom.o: .\Lib\inc\stm32f10x_conf.h
 .\output\flash_eerom.o: .\Lib\inc\stm32f10x_gpio.h
@@ -16,7 +16,7 @@
 .\output\flash_eerom.o: .\Lib\inc\stm32f10x_adc.h
 .\output\flash_eerom.o: .\Lib\inc\stm32f10x_flash.h
 .\output\flash_eerom.o: .\Lib\inc\stm32f10x_i2c.h
-.\output\flash_eerom.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\output\flash_eerom.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\output\flash_eerom.o: .\HARDWARE\Lcd2002.h
 .\output\flash_eerom.o: .\HARDWARE\gpio.h
 .\output\flash_eerom.o: .\HARDWARE\24c256.h
@@ -32,7 +32,7 @@
 .\output\flash_eerom.o: .\HARDWARE\keyboard.h
 .\output\flash_eerom.o: .\USR\user.h
 .\output\flash_eerom.o: .\USR\test.h
-.\output\flash_eerom.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\output\flash_eerom.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\output\flash_eerom.o: .\HARDWARE\flash_eerom.h
 .\output\flash_eerom.o: .\HARDWARE\Hardware.h
 .\output\flash_eerom.o: .\HARDWARE\Beep.h

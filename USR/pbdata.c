@@ -41,7 +41,7 @@ u8 run_stemp;
 Test_mid_Typedef Test_mid;
 u16 rangelomit_low,rangr_limit_high;
 Cal_TypeDef Cal[11];//校准值
-
+vu8 groupflag;
 
 //==========================================================
 //默认校准输出值
