@@ -439,12 +439,12 @@ Image Symbol Table
     i.__set_errno                            0x0801a8c4   Section        0  errno.o(i.__set_errno)
     i._is_digit                              0x0801a8d0   Section        0  scanf_fp.o(i._is_digit)
     i.atof                                   0x0801a8de   Section        0  atof.o(i.atof)
-    .constdata                               0x0801a908   Section     2281  user.o(.constdata)
-    .constdata                               0x0801b1f1   Section        5  test.o(.constdata)
-    .constdata                               0x0801b1f6   Section      672  debug.o(.constdata)
-    .constdata                               0x0801b496   Section        5  lcd2002.o(.constdata)
-    .constdata                               0x0801b49c   Section       20  hardware.o(.constdata)
-    .constdata                               0x0801b4b0   Section       64  ctype_c.o(.constdata)
+    .constdata                               0x0801a908   Section     2449  user.o(.constdata)
+    .constdata                               0x0801b299   Section        5  test.o(.constdata)
+    .constdata                               0x0801b29e   Section      672  debug.o(.constdata)
+    .constdata                               0x0801b53e   Section        5  lcd2002.o(.constdata)
+    .constdata                               0x0801b544   Section       20  hardware.o(.constdata)
+    .constdata                               0x0801b558   Section       64  ctype_c.o(.constdata)
     .data                                    0x20000000   Section       62  pbdata.o(.data)
     .data                                    0x2000003e   Section        1  stm32f10x_it.o(.data)
     num                                      0x2000003e   Data           1  stm32f10x_it.o(.data)
@@ -1051,24 +1051,24 @@ Image Symbol Table
     ParameterLimit_dot                       0x0801b110   Data          22  user.o(.constdata)
     ParameterLimit_len                       0x0801b126   Data          32  user.o(.constdata)
     MsgTab                                   0x0801b146   Data          77  user.o(.constdata)
-    FactoryTabS                              0x0801b193   Data          21  user.o(.constdata)
-    FactoryTab                               0x0801b1a8   Data          21  user.o(.constdata)
-    ParameterDotTab                          0x0801b1bd   Data          52  user.o(.constdata)
-    IR_Range_dot                             0x0801b1f1   Data           5  test.o(.constdata)
-    CalibrateLimit                           0x0801b1f6   Data          44  debug.o(.constdata)
-    CalibrateLimitvalue                      0x0801b222   Data          20  debug.o(.constdata)
-    DebugMenu                                0x0801b236   Data         187  debug.o(.constdata)
-    Debugext                                 0x0801b2f1   Data          17  debug.o(.constdata)
-    Debugtext                                0x0801b302   Data          21  debug.o(.constdata)
-    CalIrTab                                 0x0801b317   Data         168  debug.o(.constdata)
-    CalTestTab                               0x0801b3bf   Data         187  debug.o(.constdata)
-    EnterTab1                                0x0801b47a   Data          17  debug.o(.constdata)
-    Debug_Dot                                0x0801b48b   Data          11  debug.o(.constdata)
-    LCD_INIT_PARAMETER                       0x0801b496   Data           5  lcd2002.o(.constdata)
-    ArcLevel                                 0x0801b49c   Data          20  hardware.o(.constdata)
-    __ctype_categories                       0x0801b4b0   Data          64  ctype_c.o(.constdata)
-    Region$$Table$$Base                      0x0801b4f0   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x0801b510   Number         0  anon$$obj.o(Region$$Table)
+    FactoryTabS                              0x0801b193   Data         105  user.o(.constdata)
+    FactoryTab                               0x0801b1fc   Data         105  user.o(.constdata)
+    ParameterDotTab                          0x0801b265   Data          52  user.o(.constdata)
+    IR_Range_dot                             0x0801b299   Data           5  test.o(.constdata)
+    CalibrateLimit                           0x0801b29e   Data          44  debug.o(.constdata)
+    CalibrateLimitvalue                      0x0801b2ca   Data          20  debug.o(.constdata)
+    DebugMenu                                0x0801b2de   Data         187  debug.o(.constdata)
+    Debugext                                 0x0801b399   Data          17  debug.o(.constdata)
+    Debugtext                                0x0801b3aa   Data          21  debug.o(.constdata)
+    CalIrTab                                 0x0801b3bf   Data         168  debug.o(.constdata)
+    CalTestTab                               0x0801b467   Data         187  debug.o(.constdata)
+    EnterTab1                                0x0801b522   Data          17  debug.o(.constdata)
+    Debug_Dot                                0x0801b533   Data          11  debug.o(.constdata)
+    LCD_INIT_PARAMETER                       0x0801b53e   Data           5  lcd2002.o(.constdata)
+    ArcLevel                                 0x0801b544   Data          20  hardware.o(.constdata)
+    __ctype_categories                       0x0801b558   Data          64  ctype_c.o(.constdata)
+    Region$$Table$$Base                      0x0801b598   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x0801b5b8   Number         0  anon$$obj.o(Region$$Table)
     F_Fail                                   0x20000000   Data           1  pbdata.o(.data)
     F_100ms                                  0x20000001   Data           1  pbdata.o(.data)
     F_Password                               0x20000002   Data           1  pbdata.o(.data)
@@ -1149,9 +1149,9 @@ Memory Map of the image
 
   Image Entry point : 0x08010131
 
-  Load Region LR_IROM1 (Base: 0x08010000, Size: 0x0000b5d8, Max: 0x00030000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08010000, Size: 0x0000b680, Max: 0x00030000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08010000, Load base: 0x08010000, Size: 0x0000b510, Max: 0x00030000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08010000, Load base: 0x08010000, Size: 0x0000b5b8, Max: 0x00030000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -1241,42 +1241,42 @@ Memory Map of the image
     0x0801a8c4   0x0801a8c4   0x0000000c   Code   RO          764    i.__set_errno       mc_w.l(errno.o)
     0x0801a8d0   0x0801a8d0   0x0000000e   Code   RO          784    i._is_digit         mc_w.l(scanf_fp.o)
     0x0801a8de   0x0801a8de   0x0000002a   Code   RO          700    i.atof              m_ws.l(atof.o)
-    0x0801a908   0x0801a908   0x000008e9   Data   RO          185    .constdata          user.o
-    0x0801b1f1   0x0801b1f1   0x00000005   Data   RO          204    .constdata          test.o
-    0x0801b1f6   0x0801b1f6   0x000002a0   Data   RO          252    .constdata          debug.o
-    0x0801b496   0x0801b496   0x00000005   Data   RO          591    .constdata          lcd2002.o
-    0x0801b49b   0x0801b49b   0x00000001   PAD
-    0x0801b49c   0x0801b49c   0x00000014   Data   RO          647    .constdata          hardware.o
-    0x0801b4b0   0x0801b4b0   0x00000040   Data   RO          789    .constdata          mc_w.l(ctype_c.o)
-    0x0801b4f0   0x0801b4f0   0x00000020   Data   RO          793    Region$$Table       anon$$obj.o
+    0x0801a908   0x0801a908   0x00000991   Data   RO          185    .constdata          user.o
+    0x0801b299   0x0801b299   0x00000005   Data   RO          204    .constdata          test.o
+    0x0801b29e   0x0801b29e   0x000002a0   Data   RO          252    .constdata          debug.o
+    0x0801b53e   0x0801b53e   0x00000005   Data   RO          591    .constdata          lcd2002.o
+    0x0801b543   0x0801b543   0x00000001   PAD
+    0x0801b544   0x0801b544   0x00000014   Data   RO          647    .constdata          hardware.o
+    0x0801b558   0x0801b558   0x00000040   Data   RO          789    .constdata          mc_w.l(ctype_c.o)
+    0x0801b598   0x0801b598   0x00000020   Data   RO          793    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x0801b510, Size: 0x000007c8, Max: 0x0000c000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x0801b5b8, Size: 0x000007c8, Max: 0x0000c000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x0801b510   0x0000003e   Data   RW          149    .data               pbdata.o
-    0x2000003e   0x0801b54e   0x00000001   Data   RW          168    .data               stm32f10x_it.o
-    0x2000003f   0x0801b54f   0x00000001   PAD
-    0x20000040   0x0801b550   0x00000015   Data   RW          205    .data               test.o
-    0x20000055   0x0801b565   0x00000001   PAD
-    0x20000056   0x0801b566   0x00000002   Data   RW          231    .data               dma.o
-    0x20000058   0x0801b568   0x00000022   Data   RW          253    .data               debug.o
-    0x2000007a   0x0801b58a   0x00000014   Data   RW          283    .data               stm32f10x_rcc.o
-    0x2000008e   0x0801b59e   0x00000002   PAD
-    0x20000090   0x0801b5a0   0x00000014   Data   RW          430    .data               system_stm32f10x.o
-    0x200000a4   0x0801b5b4   0x00000002   Data   RW          519    .data               gpio.o
-    0x200000a6   0x0801b5b6   0x00000002   PAD
-    0x200000a8   0x0801b5b8   0x00000004   Data   RW          537    .data               time.o
-    0x200000ac   0x0801b5bc   0x00000006   Data   RW          573    .data               keyboard.o
-    0x200000b2   0x0801b5c2   0x00000002   Data   RW          592    .data               lcd2002.o
-    0x200000b4   0x0801b5c4   0x00000008   Data   RW          610    .data               disp.o
-    0x200000bc   0x0801b5cc   0x00000005   Data   RW          662    .data               beep.o
-    0x200000c1   0x0801b5d1   0x00000003   PAD
-    0x200000c4   0x0801b5d4   0x00000004   Data   RW          765    .data               mc_w.l(errno.o)
+    0x20000000   0x0801b5b8   0x0000003e   Data   RW          149    .data               pbdata.o
+    0x2000003e   0x0801b5f6   0x00000001   Data   RW          168    .data               stm32f10x_it.o
+    0x2000003f   0x0801b5f7   0x00000001   PAD
+    0x20000040   0x0801b5f8   0x00000015   Data   RW          205    .data               test.o
+    0x20000055   0x0801b60d   0x00000001   PAD
+    0x20000056   0x0801b60e   0x00000002   Data   RW          231    .data               dma.o
+    0x20000058   0x0801b610   0x00000022   Data   RW          253    .data               debug.o
+    0x2000007a   0x0801b632   0x00000014   Data   RW          283    .data               stm32f10x_rcc.o
+    0x2000008e   0x0801b646   0x00000002   PAD
+    0x20000090   0x0801b648   0x00000014   Data   RW          430    .data               system_stm32f10x.o
+    0x200000a4   0x0801b65c   0x00000002   Data   RW          519    .data               gpio.o
+    0x200000a6   0x0801b65e   0x00000002   PAD
+    0x200000a8   0x0801b660   0x00000004   Data   RW          537    .data               time.o
+    0x200000ac   0x0801b664   0x00000006   Data   RW          573    .data               keyboard.o
+    0x200000b2   0x0801b66a   0x00000002   Data   RW          592    .data               lcd2002.o
+    0x200000b4   0x0801b66c   0x00000008   Data   RW          610    .data               disp.o
+    0x200000bc   0x0801b674   0x00000005   Data   RW          662    .data               beep.o
+    0x200000c1   0x0801b679   0x00000003   PAD
+    0x200000c4   0x0801b67c   0x00000004   Data   RW          765    .data               mc_w.l(errno.o)
     0x200000c8        -       0x0000013a   Zero   RW          148    .bss                pbdata.o
     0x20000202        -       0x00000064   Zero   RW          203    .bss                test.o
-    0x20000266   0x0801b5d8   0x00000002   PAD
+    0x20000266   0x0801b680   0x00000002   PAD
     0x20000268        -       0x0000002c   Zero   RW          230    .bss                dma.o
     0x20000294        -       0x00000134   Zero   RW          555    .bss                uart.o
     0x200003c8        -       0x00000400   Zero   RW            1    STACK               startup_stm32f10x_hd.o
@@ -1321,10 +1321,10 @@ Image component sizes
      13364       1042          5         21        100      12867   test.o
        132          4          0          4          0        904   time.o
        236         14          0          0        308       2541   uart.o
-      8088        766       2281          0          0      14152   user.o
+      8088        766       2449          0          0      14152   user.o
 
     ----------------------------------------------------------------------
-     39968       2668       3320        196       1792     438430   Object Totals
+     39968       2668       3488        196       1792     438430   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          8          0          1          9          2          0   (incl. Padding)
 
@@ -1397,15 +1397,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     42968       2726       3384        200       1792     437142   Grand Totals
-     42968       2726       3384        200       1792     437142   ELF Image Totals
-     42968       2726       3384        200          0          0   ROM Totals
+     42968       2726       3552        200       1792     437142   Grand Totals
+     42968       2726       3552        200       1792     437142   ELF Image Totals
+     42968       2726       3552        200          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                46352 (  45.27kB)
+    Total RO  Size (Code + RO Data)                46520 (  45.43kB)
     Total RW  Size (RW Data + ZI Data)              1992 (   1.95kB)
-    Total ROM Size (Code + RO Data + RW Data)      46552 (  45.46kB)
+    Total ROM Size (Code + RO Data + RW Data)      46720 (  45.63kB)
 
 ==============================================================================
 
