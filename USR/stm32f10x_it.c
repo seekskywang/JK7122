@@ -341,7 +341,7 @@ void EXTI0_IRQHandler(void)
 {
 	//delay_ms(1);//消抖
 	 	 //电弧
-	if(GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_0)==0  && SaveData.Setup.Arc != 0)
+	if(GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_0)==0  && SaveData.Setup.Arc != 0 &&  GetSystemStatus()==SYS_STATUS_TEST)
 	{
 		SetSystemMessage(MSG_ARC);
 	
@@ -353,7 +353,7 @@ void EXTI0_IRQHandler(void)
 void EXTI1_IRQHandler(void)
 {
 	delay_ms(1);//消抖
-	if(GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_1)==0)//过流中断
+	if(GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_1)==0 && GetSystemStatus()==SYS_STATUS_TEST)//过流中断
 	{
 		if(Test_mid.set_item == W_ISETUP && run_stemp == 1)
 		{
