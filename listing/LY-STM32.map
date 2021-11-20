@@ -1302,7 +1302,7 @@ Image component sizes
        956         34         20          0          0       3839   hardware.o
        600         24          0          6          0       3104   keyboard.o
        368         20          5          2          0       3035   lcd2002.o
-       176         22          0          0          0     279252   main.o
+       176         22          0          0          0     279336   main.o
        220         22          0          0          0       1621   misc.o
        620         12          0          0          0       1808   myiic.o
        236          4          0         62        314       9888   pbdata.o
@@ -1324,7 +1324,7 @@ Image component sizes
       8088        766       2449          0          0      14152   user.o
 
     ----------------------------------------------------------------------
-     39984       2668       3488        196       1792     438442   Object Totals
+     39984       2668       3488        196       1792     438526   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          8          0          1          9          2          0   (incl. Padding)
 
@@ -1397,8 +1397,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     42984       2726       3552        200       1792     437154   Grand Totals
-     42984       2726       3552        200       1792     437154   ELF Image Totals
+     42984       2726       3552        200       1792     437238   Grand Totals
+     42984       2726       3552        200       1792     437238   ELF Image Totals
      42984       2726       3552        200          0          0   ROM Totals
 
 ==============================================================================
