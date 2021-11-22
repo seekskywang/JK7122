@@ -353,17 +353,17 @@ void EXTI0_IRQHandler(void)
 void EXTI1_IRQHandler(void)
 {
 	delay_ms(1);//消抖
-	if(GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_1)==0 && GetSystemStatus()==SYS_STATUS_TEST)//过流中断
-	{
-		if(Test_mid.set_item == W_ISETUP && run_stemp == 1)
-		{
-			SetSystemMessage(MSG_LOW);
-		}else if(Test_mid.set_item == I_WSETUP && run_stemp == 0){
-			SetSystemMessage(MSG_LOW);
-		}else{
-			SetSystemMessage(MSG_OVER);
-		}
-	}
+//	if(GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_1)==0 && GetSystemStatus()==SYS_STATUS_TEST)//过流中断
+//	{
+//		if(Test_mid.set_item == W_ISETUP && run_stemp == 1)
+//		{
+//			SetSystemMessage(MSG_LOW);
+//		}else if(Test_mid.set_item == I_WSETUP && run_stemp == 0){
+//			SetSystemMessage(MSG_LOW);
+//		}else{
+//			SetSystemMessage(MSG_OVER);
+//		}
+//	}
 		 
 	EXTI_ClearITPendingBit(EXTI_Line1);  //清除LINE2上的中断标志位  
 }

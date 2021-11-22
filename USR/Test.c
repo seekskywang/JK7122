@@ -1160,36 +1160,36 @@ void Test_Process(void)
 //					if(Test_value.Test_Time>=2)
 //					{
 						dat=Test_value.Test_I;
-						if(dat>Test_mid.set_high)//超上限
-						{
-							if(SaveData.Setup.Item == 0)//AC
-							{
-								if(dat>1200)//超上限
-								{
-									SetSystemMessage(MSG_OFL);
-								}else{
-									SetSystemMessage(MSG_HIGH);
-								}
-							}
-							
-							if(SaveData.Setup.Item == 1)//DC
-							{
-								if(dat>5000)//超上限
-								{
-									SetSystemMessage(MSG_OFL);
-								}else{
-									SetSystemMessage(MSG_HIGH);
-								}
-							}
-							
-							
-							sendbuff2[2] = W_F_HI;
-						}
-						if(dat<Test_mid.set_low)//超下限
-						{
-							SetSystemMessage(MSG_LOW);
-							sendbuff2[2] = W_F_LO;
-						}
+//						if(dat>Test_mid.set_high)//超上限
+//						{
+//							if(SaveData.Setup.Item == 0)//AC
+//							{
+//								if(dat>60000)//超上限
+//								{
+//									SetSystemMessage(MSG_OFL);
+//								}else{
+//									SetSystemMessage(MSG_HIGH);
+//								}
+//							}
+//							
+//							if(SaveData.Setup.Item == 1)//DC
+//							{
+//								if(dat>5000)//超上限
+//								{
+//									SetSystemMessage(MSG_OFL);
+//								}else{
+//									SetSystemMessage(MSG_HIGH);
+//								}
+//							}
+//							
+//							
+//							sendbuff2[2] = W_F_HI;
+//						}
+//						if(dat<Test_mid.set_low)//超下限
+//						{
+//							SetSystemMessage(MSG_LOW);
+//							sendbuff2[2] = W_F_LO;
+//						}
 //					}
 					break;
 				
@@ -1212,16 +1212,16 @@ void Test_Process(void)
 								break;
 						
 						}
-						if((dat>Test_mid.set_high)&&(Test_mid.set_high!=0))//超上限
-						{
-							SetSystemMessage(MSG_HIGH);
-							sendbuff2[2] = I_HIGH;
-						}
-						if(dat<Test_mid.set_low)//超下限
-						{
-							SetSystemMessage(MSG_LOW);
-							sendbuff2[2] = I_LO;
-						}
+//						if((dat>Test_mid.set_high)&&(Test_mid.set_high!=0))//超上限
+//						{
+//							SetSystemMessage(MSG_HIGH);
+//							sendbuff2[2] = I_HIGH;
+//						}
+//						if(dat<Test_mid.set_low)//超下限
+//						{
+//							SetSystemMessage(MSG_LOW);
+//							sendbuff2[2] = I_LO;
+//						}
 //					}
 					break;
 				case I_WSETUP:
@@ -1245,20 +1245,20 @@ void Test_Process(void)
 									break;
 							
 							}
-							if((dat>Test_mid.set_high)&&(Test_mid.set_high!=0))//超上限
-							{
-								SetSystemMessage(MSG_HIGH);
-								sendbuff2[2] = I_HIGH;
-							}else{
-								sendbuff2[2] = I_PASS;
-							}
-							if(dat<Test_mid.set_low)//超下限
-							{
-								SetSystemMessage(MSG_LOW);
-								sendbuff2[2] = I_LO;
-							}else{
-								sendbuff2[2] = I_PASS;
-							}
+//							if((dat>Test_mid.set_high)&&(Test_mid.set_high!=0))//超上限
+//							{
+//								SetSystemMessage(MSG_HIGH);
+//								sendbuff2[2] = I_HIGH;
+//							}else{
+//								sendbuff2[2] = I_PASS;
+//							}
+//							if(dat<Test_mid.set_low)//超下限
+//							{
+//								SetSystemMessage(MSG_LOW);
+//								sendbuff2[2] = I_LO;
+//							}else{
+//								sendbuff2[2] = I_PASS;
+//							}
 //						}
 					
 					}
@@ -1267,34 +1267,34 @@ void Test_Process(void)
 //						if(Test_value.Test_Time>=2)
 //						{
 							dat=Test_value.Test_I;
-							if(dat>Test_mid.set_high)//超上限
-							{
-								if(SaveData.Setup.Item == 0)//AC
-								{
-									if(dat>1200)//超上限
-									{
-										SetSystemMessage(MSG_OFL);
-									}else{
-										SetSystemMessage(MSG_HIGH);
-									}
-								}
-								
-								if(SaveData.Setup.Item == 1)//DC
-								{
-									if(dat>5000)//超上限
-									{
-										SetSystemMessage(MSG_OFL);
-									}else{
-										SetSystemMessage(MSG_HIGH);
-									}
-								}
-								sendbuff3[2] = W_F_HI;
-							}
-							if(dat<Test_mid.set_low)//超下限
-							{
-								SetSystemMessage(MSG_LOW);
-								sendbuff3[2] = W_F_LO;
-							}
+//							if(dat>Test_mid.set_high)//超上限
+//							{
+//								if(SaveData.Setup.Item == 0)//AC
+//								{
+//									if(dat>60000)//超上限
+//									{
+//										SetSystemMessage(MSG_OFL);
+//									}else{
+//										SetSystemMessage(MSG_HIGH);
+//									}
+//								}
+//								
+//								if(SaveData.Setup.Item == 1)//DC
+//								{
+//									if(dat>5000)//超上限
+//									{
+//										SetSystemMessage(MSG_OFL);
+//									}else{
+//										SetSystemMessage(MSG_HIGH);
+//									}
+//								}
+//								sendbuff3[2] = W_F_HI;
+//							}
+//							if(dat<Test_mid.set_low)//超下限
+//							{
+//								SetSystemMessage(MSG_LOW);
+//								sendbuff3[2] = W_F_LO;
+//							}
 //						}
 					}
 					break;
@@ -1304,38 +1304,38 @@ void Test_Process(void)
 //						if(Test_value.Test_Time>=2)
 //						{
 							dat=Test_value.Test_I;
-							if(dat>Test_mid.set_high)//超上限
-							{
-								if(SaveData.Setup.Item == 0)//AC
-								{
-									if(dat>1200)//超上限
-									{
-										SetSystemMessage(MSG_OFL);
-									}else{
-										SetSystemMessage(MSG_HIGH);
-									}
-								}
-								
-								if(SaveData.Setup.Item == 1)//DC
-								{
-									if(dat>5000)//超上限
-									{
-										SetSystemMessage(MSG_OFL);
-									}else{
-										SetSystemMessage(MSG_HIGH);
-									}
-								}
-								sendbuff2[2] = W_F_HI;
-							}else{
-								sendbuff2[2] = W_PASS;
-							}
-							if(dat<Test_mid.set_low)//超下限
-							{
-								SetSystemMessage(MSG_LOW);
-								sendbuff2[2] = W_F_LO;
-							}else{
-								sendbuff2[2] = W_PASS;
-							}
+//							if(dat>Test_mid.set_high)//超上限
+//							{
+//								if(SaveData.Setup.Item == 0)//AC
+//								{
+//									if(dat>60000)//超上限
+//									{
+//										SetSystemMessage(MSG_OFL);
+//									}else{
+//										SetSystemMessage(MSG_HIGH);
+//									}
+//								}
+//								
+//								if(SaveData.Setup.Item == 1)//DC
+//								{
+//									if(dat>5000)//超上限
+//									{
+//										SetSystemMessage(MSG_OFL);
+//									}else{
+//										SetSystemMessage(MSG_HIGH);
+//									}
+//								}
+//								sendbuff2[2] = W_F_HI;
+//							}else{
+//								sendbuff2[2] = W_PASS;
+//							}
+//							if(dat<Test_mid.set_low)//超下限
+//							{
+//								SetSystemMessage(MSG_LOW);
+//								sendbuff2[2] = W_F_LO;
+//							}else{
+//								sendbuff2[2] = W_PASS;
+//							}
 //						}
 					}
 					else
@@ -1358,16 +1358,16 @@ void Test_Process(void)
 									break;
 							
 							}
-							if((dat>Test_mid.set_high)&&(Test_mid.set_high!=0))//超上限
-							{
-								SetSystemMessage(MSG_HIGH);
-								sendbuff3[2] = I_HIGH;
-							}
-							if(dat<Test_mid.set_low)//超下限
-							{
-								SetSystemMessage(MSG_LOW);
-								sendbuff3[2] = I_LO;
-							}
+//							if((dat>Test_mid.set_high)&&(Test_mid.set_high!=0))//超上限
+//							{
+//								SetSystemMessage(MSG_HIGH);
+//								sendbuff3[2] = I_HIGH;
+//							}
+//							if(dat<Test_mid.set_low)//超下限
+//							{
+//								SetSystemMessage(MSG_LOW);
+//								sendbuff3[2] = I_LO;
+//							}
 //						}
 					}
 					break;
