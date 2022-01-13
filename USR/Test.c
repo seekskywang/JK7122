@@ -382,6 +382,7 @@ void Test_Init(void)
 	//读取校准值
 	if(set_item==W_SETUP)
 	{
+		Range=0;
 		ra_flag=0;
 		set_out=SaveData.Setup.Output*10;//设置的输出
 		if(SaveData.Setup.RampDelay == 1)
@@ -451,6 +452,7 @@ void Test_Init(void)
 		}
 		else
 		{
+			Range=0;
 			rangelomit_low=240;
 			rangr_limit_high=3800;
 			ra_flag=0;
@@ -480,6 +482,7 @@ void Test_Init(void)
 	{
 		if(run_stemp==0)
 		{
+			Range=0;
 			rangelomit_low=240;
 			rangr_limit_high=3800;
 			if(SaveData.Setup.RampDelay == 1)
@@ -809,7 +812,8 @@ void Test_Process(void)
 			}
 			set_item=SaveData.Setup.Item;
 		
-			max=1;//最大量程-2档
+//			max=1;//最大量程-2档
+			max=0;
 			break;
 
 		case I_WSETUP://绝缘耐压测试
@@ -824,7 +828,8 @@ void Test_Process(void)
 			}
 			else
 			{
-				max=1;
+				max=0;
+//				max=1;
 				Test_mid.set_high=SaveData.Setup.High;
 				Test_mid.set_low=SaveData.Setup.Low;
 				Test_mid.set_time=SaveData.Setup.TestTime;
@@ -843,7 +848,8 @@ void Test_Process(void)
 			U2.BIT_FLAG.item = 2;
 			if(run_stemp==0)
 			{
-				max=1;//最大量程-1档
+				max=0;
+//				max=1;//最大量程-1档
 				Test_mid.set_high=SaveData.Setup.High;
 				Test_mid.set_low=SaveData.Setup.Low;
 				Test_mid.set_time=SaveData.Setup.TestTime;
@@ -972,33 +978,41 @@ void Test_Process(void)
 		Read_Ad();//读取AD值
 		Ad_Filter();//AD值滤波
 		Get_Result();//计算测试值
-		//量程自动换挡处理
-		if(Current>rangr_limit_high)//高于量程上限
+		if(Test_mid.set_item == I_SETUP ||(Test_mid.set_item == W_ISETUP && run_stemp == 1) 
+		|| (Test_mid.set_item == W_ISETUP && run_stemp == 1)
+		|| (Test_mid.set_item == I_WSETUP && run_stemp == 0))
 		{
-			f_upper=TRUE;//量程过压标志
-			f_below=FALSE;//量程欠压标志
-		}
-		else if(Current<rangelomit_low)//低于量程下限
-		{
-			f_below=TRUE;//量程低压标志
-			f_upper=FALSE;//量程欠压标志
-		}
-		else
-		{
-			f_upper=FALSE;//量程过压标志
-			f_below=FALSE;//量程欠压标志
-		}
+			//量程自动换挡处理
+			if(Current>rangr_limit_high)//高于量程上限
+			{
+				f_upper=TRUE;//量程过压标志
+				f_below=FALSE;//量程欠压标志
+			}
+			else if(Current<rangelomit_low)//低于量程下限
+			{
+				f_below=TRUE;//量程低压标志
+				f_upper=FALSE;//量程欠压标志
+			}
+			else
+			{
+				f_upper=FALSE;//量程过压标志
+				f_below=FALSE;//量程欠压标志
+			}
 
-		f_switch=FALSE;//量程切换标志
-		if((Range<max)&&(f_below==TRUE))//量程非最高且低压
-		{
-			Range++;
-			f_switch=TRUE;//量程切换标志
-		}
-		if((Range>0)&&(f_upper==TRUE))//量程非最低且过压
-		{
-			Range--;
-			f_switch=TRUE;//量程切换标志
+			f_switch=FALSE;//量程切换标志
+			if((Range<max)&&(f_below==TRUE))//量程非最高且低压
+			{
+				Range++;
+				f_switch=TRUE;//量程切换标志
+			}
+			if((Range>0)&&(f_upper==TRUE))//量程非最低且过压
+			{
+				Range--;
+				f_switch=TRUE;//量程切换标志
+			}
+		}else{
+//			Range=0;
+//			Range_Control(Range);//量程控制
 		}
 		if(f_switch==TRUE)//量程切换标志
 		{

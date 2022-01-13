@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\output\LY-STM32.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\output\LY-STM32.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri May 21 16:22:08 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu Jan 13 14:47:18 2022
 <BR><P>
 <H3>Maximum Stack Usage =        312 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -781,7 +781,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TestPause_Process
 </UL>
 
-<P><STRONG><a name="[bd]"></a>Test_Init</STRONG> (Thumb, 1356 bytes, Stack size 48 bytes, test.o(.text))
+<P><STRONG><a name="[bd]"></a>Test_Init</STRONG> (Thumb, 1378 bytes, Stack size 48 bytes, test.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = Test_Init &rArr; Disp_SysMessage &rArr; Disp_StrAt &rArr; Disp_Str &rArr; Lcd_WriteData &rArr; Lcd_AddrUpdate &rArr; Lcd_SetAddr &rArr; Lcd_WriteCmd &rArr; Lcd_ReadBF
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Cmd
@@ -809,7 +809,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Test_Process
 </UL>
 
-<P><STRONG><a name="[c5]"></a>Get_Result</STRONG> (Thumb, 1404 bytes, Stack size 16 bytes, test.o(.text))
+<P><STRONG><a name="[c5]"></a>Get_Result</STRONG> (Thumb, 1402 bytes, Stack size 16 bytes, test.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = Get_Result &rArr; jisuandianzu
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;jisuandianzu
@@ -832,7 +832,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Test_Process
 </UL>
 
-<P><STRONG><a name="[57]"></a>Test_Process</STRONG> (Thumb, 5444 bytes, Stack size 80 bytes, test.o(.text))
+<P><STRONG><a name="[57]"></a>Test_Process</STRONG> (Thumb, 5492 bytes, Stack size 80 bytes, test.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 304<LI>Call Chain = Test_Process &rArr; atof &rArr; __strtod_int &rArr; _local_sscanf &rArr; _scanf_real
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
@@ -1173,17 +1173,17 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[e1]"></a>RCC_APB2PeriphResetCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f10x_rcc.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_DeInit
-<LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_DeInit
-<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_DeInit
+<BR><BR>[Called By]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_DeInit
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_AFIODeInit
 <LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_DeInit
+<LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_DeInit
+<LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_DeInit
 </UL>
 
 <P><STRONG><a name="[e4]"></a>RCC_APB1PeriphResetCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f10x_rcc.o(.text), UNUSED)
-<BR><BR>[Called By]<UL><LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DAC_DeInit
+<BR><BR>[Called By]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_DeInit
+<LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DAC_DeInit
 <LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_DeInit
-<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_DeInit
 </UL>
 
 <P><STRONG><a name="[178]"></a>RCC_BackupResetCmd</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, stm32f10x_rcc.o(.text), UNUSED)
@@ -1837,16 +1837,16 @@ Global Symbols
 <P><STRONG><a name="[10d]"></a>ADC_Configuration</STRONG> (Thumb, 196 bytes, Stack size 32 bytes, adc.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = ADC_Configuration &rArr; GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetCalibrationStatus
+<BR>[Calls]<UL><LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
+<LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_ADCCLKConfig
+<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
+<LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetCalibrationStatus
 <LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_StartCalibration
 <LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetResetCalibrationStatus
 <LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_ResetCalibration
 <LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Cmd
 <LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Init
 <LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_DeInit
-<LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
-<LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_ADCCLKConfig
-<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Hardware_Init
 </UL>
@@ -1854,10 +1854,10 @@ Global Symbols
 <P><STRONG><a name="[116]"></a>Get_Adc</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, adc.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = Get_Adc &rArr; ADC_RegularChannelConfig
 </UL>
-<BR>[Calls]<UL><LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetConversionValue
+<BR>[Calls]<UL><LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetFlagStatus
+<LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetConversionValue
 <LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_RegularChannelConfig
 <LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_SoftwareStartConvCmd
-<LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetFlagStatus
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Read_Ad_Ch1
 <LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Read_Ad_Ch0
@@ -1866,14 +1866,14 @@ Global Symbols
 <P><STRONG><a name="[11b]"></a>DAC_Configuration</STRONG> (Thumb, 122 bytes, Stack size 24 bytes, dac.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = DAC_Configuration &rArr; GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DAC_SetChannel2Data
-<LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DAC_SetChannel1Data
-<LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DAC_Cmd
-<LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DAC_Init
-<LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB1PeriphClockCmd
+<BR>[Calls]<UL><LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB1PeriphClockCmd
 <LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
 <LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
 <LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
+<LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DAC_SetChannel2Data
+<LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DAC_SetChannel1Data
+<LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DAC_Cmd
+<LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DAC_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Hardware_Init
 </UL>
@@ -1946,10 +1946,10 @@ Global Symbols
 <P><STRONG><a name="[12b]"></a>USART_Configuration</STRONG> (Thumb, 68 bytes, Stack size 24 bytes, uart.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 92<LI>Call Chain = USART_Configuration &rArr; USART_Init &rArr; RCC_GetClocksFreq
 </UL>
-<BR>[Calls]<UL><LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_ITConfig
+<BR>[Calls]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_ClearFlag
+<LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_ITConfig
 <LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Cmd
 <LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_Init
-<LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_ClearFlag
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Hardware_Init
 </UL>
