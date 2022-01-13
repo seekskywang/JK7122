@@ -972,6 +972,8 @@ void Test_Process(void)
 		Read_Ad();//读取AD值
 		Ad_Filter();//AD值滤波
 		Get_Result();//计算测试值
+		
+		
 		//量程自动换挡处理
 		if(Current>rangr_limit_high)//高于量程上限
 		{
@@ -1000,6 +1002,9 @@ void Test_Process(void)
 			Range--;
 			f_switch=TRUE;//量程切换标志
 		}
+		
+		
+		
 		if(f_switch==TRUE)//量程切换标志
 		{
 			AdCount=0;//AD值缓冲次数
@@ -1160,36 +1165,36 @@ void Test_Process(void)
 //					if(Test_value.Test_Time>=2)
 //					{
 						dat=Test_value.Test_I;
-//						if(dat>Test_mid.set_high)//超上限
-//						{
-//							if(SaveData.Setup.Item == 0)//AC
-//							{
-//								if(dat>60000)//超上限
-//								{
-//									SetSystemMessage(MSG_OFL);
-//								}else{
-//									SetSystemMessage(MSG_HIGH);
-//								}
-//							}
-//							
-//							if(SaveData.Setup.Item == 1)//DC
-//							{
-//								if(dat>5000)//超上限
-//								{
-//									SetSystemMessage(MSG_OFL);
-//								}else{
-//									SetSystemMessage(MSG_HIGH);
-//								}
-//							}
-//							
-//							
-//							sendbuff2[2] = W_F_HI;
-//						}
-//						if(dat<Test_mid.set_low)//超下限
-//						{
-//							SetSystemMessage(MSG_LOW);
-//							sendbuff2[2] = W_F_LO;
-//						}
+						if(dat>Test_mid.set_high)//超上限
+						{
+							if(SaveData.Setup.Item == 0)//AC
+							{
+								if(dat>60000)//超上限
+								{
+									SetSystemMessage(MSG_OFL);
+								}else{
+									SetSystemMessage(MSG_HIGH);
+								}
+							}
+							
+							if(SaveData.Setup.Item == 1)//DC
+							{
+								if(dat>5000)//超上限
+								{
+									SetSystemMessage(MSG_OFL);
+								}else{
+									SetSystemMessage(MSG_HIGH);
+								}
+							}
+							
+							
+							sendbuff2[2] = W_F_HI;
+						}
+						if(dat<Test_mid.set_low)//超下限
+						{
+							SetSystemMessage(MSG_LOW);
+							sendbuff2[2] = W_F_LO;
+						}
 //					}
 					break;
 				

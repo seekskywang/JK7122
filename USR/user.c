@@ -2808,7 +2808,7 @@ void Step_Setup(void)
 						pt=(u16*)(&SaveData.Setup.Group_Item);
 						NumBox.Title=(u8*)GROUP_DISP_ITEM[0];
 						NumBox.Num=*pt;
-						NumBox.Max=3;//Max
+						NumBox.Max=0;//Max
 						NumBox.Min=0;//Min
 						NumBox.Dot=0;//Dot
 						NumBox.Len=1;
@@ -2828,12 +2828,12 @@ void Step_Setup(void)
 						case I_WSETUP:
 							//break;
 						case W_ISETUP:
-							if(SaveData.Setup.Item>1)
+							if(SaveData.Setup.Item>0)
 								SaveData.Setup.Item=0;
 							pt=(u16*)(&SaveData.Setup.Item);
 							NumBox.Title=(u8*)AC_DC_SET[0];
 							NumBox.Num=*pt;
-							NumBox.Max=1;//Max
+							NumBox.Max=0;//Max
 							NumBox.Min=0;//Min
 							NumBox.Dot=0;//Dot
 							NumBox.Len=1;
