@@ -27,8 +27,19 @@ Project File Date:  06/08/2021
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'E:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'LY-STM32'
+compiling user.c...
+USR\user.c(655): warning:  #177-D: variable "j"  was declared but never referenced
+        u8 i,j;
+USR\user.c(4826): warning:  #550-D: variable "temp"  was set but never used
+        u8 i,temp;
+USR\user.c(4857): warning:  #177-D: variable "i"  was declared but never referenced
+        u8 i,temp;
+USR\user.c: 3 warnings, 0 errors
+linking...
+Program Size: Code=42560 RO-data=3384 RW-data=200 ZI-data=1792  
+FromELF: creating hex file...
 After Build - User command #1: E:\Keil_v5\ARM\ARMCC\bin\fromelf.exe --bin -o update\7122XCYupdate.bin output\LY-STM32.axf
-".\output\LY-STM32.axf" - 0 Error(s), 0 Warning(s).
+".\output\LY-STM32.axf" - 0 Error(s), 3 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -51,7 +62,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.4.0
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>
