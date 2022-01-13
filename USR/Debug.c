@@ -394,7 +394,8 @@ void Res_Calibrate(u8 num)
 				Cal[num].Num=1000;//10.00mA
 		break;
 		case 4:
-			Range_Control(1);
+			Range_Control(0);
+//			Range_Control(1);
 			if(SaveData.Calibrate.AcwVol[1].Num>set_high||SaveData.Calibrate.AcwVol[1].Num<set_low)
 				Cal[num].Num=1000;//2.000mA
 			break;
@@ -408,7 +409,8 @@ void Res_Calibrate(u8 num)
 				Cal[num].Num=500;//DC5.00mA
 			break;
 		case 6:
-			Range_Control(1);
+			Range_Control(0);
+//			Range_Control(1);
 			if(SaveData.Calibrate.DcwCur[1].Num>set_high||SaveData.Calibrate.DcwCur[1].Num<set_low)
 				Cal[num].Num=1000;//2.000mA
 		break;
