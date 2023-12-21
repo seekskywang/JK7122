@@ -2,7 +2,7 @@
 .\output\misc.o: .\Lib\inc\misc.h
 .\output\misc.o: .\System\stm32f10x.h
 .\output\misc.o: .\System\core_cm3.h
-.\output\misc.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\misc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\output\misc.o: .\System\system_stm32f10x.h
 .\output\misc.o: .\Lib\inc\stm32f10x_conf.h
 .\output\misc.o: .\Lib\inc\stm32f10x_gpio.h

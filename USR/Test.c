@@ -1413,7 +1413,7 @@ void Test_Process(void)
 				case W_SETUP:
 					if(SaveData.Setup.Output>Voltage)
 					{
-						if(SaveData.Setup.Output-Voltage<=2)
+						if(SaveData.Setup.Output-Voltage<=3)
 						{
 							Voltage=SaveData.Setup.Output;
 							f_sort=TRUE;//分选标志
@@ -1422,7 +1422,7 @@ void Test_Process(void)
 					}
 					else
 					{
-						if(Voltage-SaveData.Setup.Output<=2)
+						if(Voltage-SaveData.Setup.Output<=3)
 						{
 							Voltage=SaveData.Setup.Output;
 							f_sort=TRUE;//分选标志
@@ -1500,13 +1500,13 @@ void Test_Process(void)
 						multstep = 1;
 						if(SaveData.Setup.I_Volt>Voltage)
 						{
-							if(SaveData.Setup.I_Volt-Voltage<=2)
+							if(SaveData.Setup.I_Volt-Voltage<=3)
 								Voltage=SaveData.Setup.I_Volt;
 						
 						}
 						else
 						{
-							if(Voltage-SaveData.Setup.I_Volt<=2)
+							if(Voltage-SaveData.Setup.I_Volt<=3)
 								Voltage=SaveData.Setup.I_Volt;
 						}
 						Hex_Format(Voltage,2,3,TRUE);//数据格式化到DispBuf
@@ -1569,7 +1569,7 @@ void Test_Process(void)
 						
 						if(SaveData.Setup.Output>Voltage)
 						{
-							if(SaveData.Setup.Output-Voltage<=2)
+							if(SaveData.Setup.Output-Voltage<=3)
 							{
 								Voltage=SaveData.Setup.Output;
 								f_sort=TRUE;//分选标志
@@ -1578,7 +1578,7 @@ void Test_Process(void)
 						}
 						else
 						{
-							if(Voltage-SaveData.Setup.Output<=2)
+							if(Voltage-SaveData.Setup.Output<=3)
 							{
 								Voltage=SaveData.Setup.Output;
 								f_sort=TRUE;//分选标志
@@ -1698,13 +1698,13 @@ void Test_Process(void)
 				case I_SETUP:
 					if(SaveData.Setup.I_Volt>Voltage)
 					{
-						if(SaveData.Setup.I_Volt-Voltage<=2)
+						if(SaveData.Setup.I_Volt-Voltage<=3)
 							Voltage=SaveData.Setup.I_Volt;
 					
 					}
 					else
 					{
-						if(Voltage-SaveData.Setup.I_Volt<=2)
+						if(Voltage-SaveData.Setup.I_Volt<=3)
 							Voltage=SaveData.Setup.I_Volt;
 					}
 					Hex_Format(Voltage,2,3,TRUE);//数据格式化到DispBuf
@@ -1767,7 +1767,7 @@ void Test_Process(void)
 						multstep = 1;
 						if(SaveData.Setup.Output>Voltage)
 						{
-							if(SaveData.Setup.Output-Voltage<=2)
+							if(SaveData.Setup.Output-Voltage<=3)
 							{
 								Voltage=SaveData.Setup.Output;
 								f_sort=TRUE;//分选标志
@@ -1776,7 +1776,7 @@ void Test_Process(void)
 						}
 						else
 						{
-							if(Voltage-SaveData.Setup.Output<=2)
+							if(Voltage-SaveData.Setup.Output<=3)
 							{
 								Voltage=SaveData.Setup.Output;
 								f_sort=TRUE;//分选标志
@@ -1878,13 +1878,13 @@ void Test_Process(void)
 //						strcat(sendbuff,(char*)"PASS");
 						if(SaveData.Setup.I_Volt>Voltage)
 						{
-							if(SaveData.Setup.I_Volt-Voltage<=2)
+							if(SaveData.Setup.I_Volt-Voltage<=3)
 								Voltage=SaveData.Setup.I_Volt;
 						
 						}
 						else
 						{
-							if(Voltage-SaveData.Setup.I_Volt<=2)
+							if(Voltage-SaveData.Setup.I_Volt<=3)
 								Voltage=SaveData.Setup.I_Volt;
 						}
 						Hex_Format(Voltage,2,3,TRUE);//数据格式化到DispBuf

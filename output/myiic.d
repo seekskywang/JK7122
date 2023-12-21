@@ -2,7 +2,7 @@
 .\output\myiic.o: .\USR\pbdata.h
 .\output\myiic.o: .\System\stm32f10x.h
 .\output\myiic.o: .\System\core_cm3.h
-.\output\myiic.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\myiic.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\output\myiic.o: .\System\system_stm32f10x.h
 .\output\myiic.o: .\Lib\inc\stm32f10x_conf.h
 .\output\myiic.o: .\Lib\inc\stm32f10x_gpio.h
@@ -16,7 +16,7 @@
 .\output\myiic.o: .\Lib\inc\stm32f10x_adc.h
 .\output\myiic.o: .\Lib\inc\stm32f10x_flash.h
 .\output\myiic.o: .\Lib\inc\stm32f10x_i2c.h
-.\output\myiic.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\output\myiic.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\output\myiic.o: .\HARDWARE\Lcd2002.h
 .\output\myiic.o: .\HARDWARE\gpio.h
 .\output\myiic.o: .\HARDWARE\24c256.h
@@ -32,7 +32,7 @@
 .\output\myiic.o: .\HARDWARE\keyboard.h
 .\output\myiic.o: .\USR\user.h
 .\output\myiic.o: .\USR\test.h
-.\output\myiic.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\output\myiic.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\output\myiic.o: .\HARDWARE\flash_eerom.h
 .\output\myiic.o: .\HARDWARE\Hardware.h
 .\output\myiic.o: .\HARDWARE\Beep.h

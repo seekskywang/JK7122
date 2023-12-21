@@ -2,7 +2,7 @@
 .\output\stm32f10x_rcc.o: .\Lib\inc\stm32f10x_rcc.h
 .\output\stm32f10x_rcc.o: .\System\stm32f10x.h
 .\output\stm32f10x_rcc.o: .\System\core_cm3.h
-.\output\stm32f10x_rcc.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\output\stm32f10x_rcc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\output\stm32f10x_rcc.o: .\System\system_stm32f10x.h
 .\output\stm32f10x_rcc.o: .\Lib\inc\stm32f10x_conf.h
 .\output\stm32f10x_rcc.o: .\Lib\inc\stm32f10x_gpio.h
