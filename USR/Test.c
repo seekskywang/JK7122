@@ -47,6 +47,7 @@ u8 respond;
 u8 multstep;
 u8 sendflag;
 u8 sendcheck;
+extern u8 watchflag;
 char sendend[2] = {0x0d,0x0a};
 union U1
 {
@@ -879,9 +880,9 @@ void Test_Process(void)
 			return;
 			
 	}		
-	
+
 	Test_Init();//测试初始化
-	
+		
 
 	stepT=0;//步进时间计时
 	sortT=0;//分选延时
@@ -918,6 +919,8 @@ void Test_Process(void)
 
 				if(Test_value.Test_Time>=Test_mid.set_ramp)//缓升时间判别
 				{
+//					if(watchflag == 0)
+//						watchflag = 1;
 					Test_value.Test_Time=0;//测试时间清零
 					TestOut=FullOut;//测试输出值计算
 					SetSystemMessage(MSG_TEST);//系统信息-满载测试
@@ -929,6 +932,7 @@ void Test_Process(void)
 				TestOut=FullOut;//测试输出值计算
 				if(Test_mid.set_time>0)//测试时间为0，连续测试
 				{
+					
 					if(Test_value.Test_Time>=Test_mid.set_time)//测试时间判别
 					{
 						if(Test_mid.set_item == W_SETUP 
@@ -941,6 +945,7 @@ void Test_Process(void)
 								SetSystemMessage(MSG_LOW);
 								sendbuff2[2] = W_F_LO;
 							}else{
+//								watchflag = 0;
 								SetSystemStatus(SYS_STATUS_TEST_PAUSE);//测试暂停状态
 								SetSystemMessage(MSG_PASS);//系统信息-测试合格
 								f_msgdisp=TRUE;//消息显示标志
@@ -2276,7 +2281,7 @@ void TestFinish_Process(void)
 	bool f_disp;//显示标志
 
 	f_disp=TRUE;//显示标志
-
+	
 	Led_HV_Off();//关闭高压灯
 	if(SaveData.Setup.Group_Item == W_ISETUP || SaveData.Setup.Group_Item == I_WSETUP)
 	{

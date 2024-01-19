@@ -28,6 +28,8 @@
 #include "pbdata.h"
 
 extern u8 calitem;
+u32 watchtime;
+u8 watchflag;
 void NMI_Handler(void)
 {
 }
@@ -287,9 +289,12 @@ void TIM3_IRQHandler(void)
 //	else
 //		disp_time=0;
 	Key_Scan();
+	if(watchflag == 1)
+		watchtime++;
 	//时基处理
 	if(SystemStatus==SYS_STATUS_TEST)
 	{
+		
 		num++;
 		if(num>9)//10mS时基
 		{
@@ -386,7 +391,7 @@ void EXTI2_IRQHandler(void)//启动按键
 		{
 			SetSystemStatus(SYS_STATUS_START);//启动测试状态
 			run_stemp=0;//从第一步开始
-		
+			
 		}else if(GetSystemStatus()==SYS_STATUS_IDLE){
 //			CalTest_Process(calitem);//校准测试处理
 //			Disp_Clr( );//清屏
