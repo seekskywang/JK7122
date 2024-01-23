@@ -455,20 +455,22 @@ const u8 MsgTab[][6+1]=
 const u8 FactoryTabS[][20+1]=
 {	
 	{"                "},//型号
-	{"     JINKO      "},//型号
-	{" 7122  VER:2.26"},//名称
-	{" Tel:0519-88226706  "},//电话
-	{" Fax:0519-88226808  "},//传真
+//	{"     JINKO      "},//型号
+	{"   VER:2.27"},//名称
+//	{" 7122  VER:2.27"},//名称
+//	{" Tel:0519-88226706  "},//电话
+//	{" Fax:0519-88226808  "},//传真
 	{" "},//主页
 };
 
 const u8 FactoryTab[][20+1]=
 {	
 	{"                "},//型号
-	{"     JINKO      "},//型号
-	{" 7122  VER:2.26"},//名称
-	{" Tel:0519-88226706  "},//电话
-	{" Fax:0519-88226808  "},//传真
+//	{"     JINKO      "},//型号
+	{"   VER:2.27"},//名称
+//	{" 7122  VER:2.27"},//名称
+//	{" Tel:0519-88226706  "},//电话
+//	{" Fax:0519-88226808  "},//传真
 	{" "},//主页
 };
 //2.11增加绝缘1G校准点
@@ -2352,7 +2354,7 @@ u8 Number_Setup(NumBox_TypeDef * pt)
 					pt->Num-=POW_NUM[len];
 				else
 				{
-					if(pt->Min == 5 || pt->Min == 6)
+					if(pt->Min == 2 || pt->Min == 6)
 					{
 						if(pt->Min == 6)
 						{
@@ -2364,7 +2366,7 @@ u8 Number_Setup(NumBox_TypeDef * pt)
 							}
 						}
 						
-						if(pt->Min == 5)
+						if(pt->Min == 2)
 						{
 							if(pt->Num != 0)
 							{
@@ -2415,7 +2417,7 @@ u8 Number_Setup(NumBox_TypeDef * pt)
 						}
 					}
 					
-					if(pt->Min == 5)
+					if(pt->Min == 2)
 					{
 						if(pt->Num != 0)
 						{
@@ -2434,7 +2436,7 @@ u8 Number_Setup(NumBox_TypeDef * pt)
 					len=current-1;
 				else
 					len=current;
-				if(pt->Min == 6 || pt->Min == 5)
+				if(pt->Min == 6 || pt->Min == 2)
 				{
 					if(pt->Min == 6)
 					{
@@ -2446,11 +2448,11 @@ u8 Number_Setup(NumBox_TypeDef * pt)
 						}
 					}
 					
-					if(pt->Min == 5)
+					if(pt->Min == 2)
 					{
 						if(pt->Num == 0)
 						{
-							pt->Num = 5;
+							pt->Num = 2;
 						}else{
 							pt->Num+=POW_NUM[len];
 						}
@@ -2488,7 +2490,7 @@ u8 Number_Setup(NumBox_TypeDef * pt)
 				{
 					if(len>0)len--;
 				}
-				if(pt->Min == 6 || pt->Min == 5)
+				if(pt->Min == 6 || pt->Min == 2)
 				{
 					if(pt->Min == 6)
 					{
@@ -2500,11 +2502,11 @@ u8 Number_Setup(NumBox_TypeDef * pt)
 						}
 					}
 					
-					if(pt->Min == 5)
+					if(pt->Min == 2)
 					{
 						if(pt->Num == 0)
 						{
-							pt->Num = 5;
+							pt->Num = 2;
 						}else{
 							pt->Num+=POW_NUM[len];
 						}
