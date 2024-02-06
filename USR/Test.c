@@ -3006,8 +3006,8 @@ if(SaveData.pselect == 0)//通讯协议1
 					default:
 						break;
 				}
-				SaveGroup();//保存组别
-				Store_set_flash();
+//				SaveGroup();//保存组别
+//				Store_set_flash();
 				Disp_Idle_Menu();//显示待测界面
 				break;
 			case FRAME_DATA://数据帧
@@ -3046,13 +3046,13 @@ if(SaveData.pselect == 0)//通讯协议1
 					
 				
 				}
-				SaveGroup();//保存组别
-				Store_set_flash();
+//				SaveGroup();//保存组别
+//				Store_set_flash();
 				Disp_Idle_Menu();//显示待测界面
 				break;
 			case FRAME_SELECT_GROUP:
 				SaveData.Group=sec_king-1;
-				SaveGroup();
+//				SaveGroup();
 				SetSystemStatus(SYS_STATUS_IDLE);//待机状态
 				ReadSetByGroup();
 				Parameter_valuecomp();//比较设置参数
@@ -3102,7 +3102,7 @@ if(SaveData.pselect == 0)//通讯协议1
 				{
 					run_stemp=0;
 					SaveData.Group=recbuf[5];
-					SaveGroup();
+//					SaveGroup();
 					SetSystemStatus(SYS_STATUS_IDLE);//待机状态
 					ReadSetByGroup();
 					Parameter_valuecomp();//比较设置参数					
@@ -3113,7 +3113,7 @@ if(SaveData.pselect == 0)//通讯协议1
 		case GROUPSET://组别设置
 		{
 			SaveData.Group=recbuf[4];
-			SaveGroup();
+//			SaveGroup();
 			SetSystemStatus(SYS_STATUS_IDLE);//待机状态
 			ReadSetByGroup();
 			Parameter_valuecomp();//比较设置参数
@@ -3137,8 +3137,8 @@ if(SaveData.pselect == 0)//通讯协议1
 			SaveData.Setup.I_Low=(u16)(recbuf[18]<<8) + recbuf[19];//绝缘下限
 			SaveData.Setup.I_Delay=(u16)(recbuf[20]<<8) + recbuf[21];//延时判定
 			
-			SaveGroup();//保存组别
-			Store_set_flash();
+//			SaveGroup();//保存组别
+//			Store_set_flash();
 			Disp_Idle_Menu();//显示待测界面
 		}break;
 	}
